@@ -1,0 +1,125 @@
+<div class="grid-2">
+  <section class="default-gradient section-sapce">
+    <div class="text-layout">
+      <h1 class="text-h1">
+        {{ "auth.login_welcome" | translate }}
+      </h1>
+      <p
+        class="text-h4 c-neutral-100"
+        [innerHTML]="
+          'auth.login_description' | translate : {} : 'c-neutral-900'
+        "
+      ></p>
+
+      <span class="text-h5 c-neutral-100">{{
+        "auth.login_call_to_action" | translate
+      }}</span>
+    </div>
+  </section>
+  <section class="section-sapce">
+    <p-card class="form-container">
+      <ng-template #title>
+        <h2 class="text-h2" style="margin: 0">
+          {{ "auth.sign_in_title" | translate }}
+        </h2>
+      </ng-template>
+      <ng-template #subtitle>
+        <h2 class="text-h5" style="margin: 0">
+          {{ "auth.sign_in_subtitle" | translate }}
+        </h2>
+      </ng-template>
+
+      <form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+        <!-- Mensagem de erro global -->
+        @if (errorMessage()) {
+        <p-message severity="error" styleClass="w-full mb-3">
+          {{ errorMessage() }}
+        </p-message>
+        }
+
+        <div class="form-grid">
+          <!-- Email -->
+          <div class="form-field">
+            <label for="username">{{ "auth.userName" | translate }}</label>
+            <input
+              pInputText
+              id="userName"
+              type="username"
+              formControlName="username"
+              [placeholder]="'auth.userName_placeholder' | translate"
+              [invalid]="
+                signInForm.get('username')?.invalid &&
+                signInForm.get('username')?.touched
+              "
+            />
+            @if (signInForm.get('username')?.invalid &&
+            signInForm.get('username')?.touched) {
+            <p-message severity="error" size="small" variant="simple">
+              @if (signInForm.get('username')?.hasError('required')) {
+              {{ "forms.required_field" | translate }}
+              }
+            </p-message>
+            }
+          </div>
+
+          <!-- Senha -->
+          <div class="form-field">
+            <label for="password">{{ "auth.password" | translate }}</label>
+            <input
+              pInputText
+              id="password"
+              type="password"
+              formControlName="password"
+              [placeholder]="'auth.password_placeholder' | translate"
+              [invalid]="
+                signInForm.get('password')?.invalid &&
+                signInForm.get('password')?.touched
+              "
+            />
+            @if (signInForm.get('password')?.invalid &&
+            signInForm.get('password')?.touched) {
+            <p-message severity="error" size="small" variant="simple">
+              @if (signInForm.get('password')?.hasError('required')) {
+              {{ "forms.required_field" | translate }}
+              } @if (signInForm.get('password')?.hasError('minlength')) {
+              {{ "forms.password_min_length" | translate : { min: "6" } }}
+              }
+            </p-message>
+            }
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p-button
+            type="submit"
+            [label]="'auth.sign_in' | translate"
+            [loading]="isLoading"
+            [disabled]="isLoading"
+          ></p-button>
+
+          <a routerLink="/sigin-up">
+            <p-button
+              severity="secondary"
+              [label]="'auth.dont_have_account' | translate"
+              [disabled]="isLoading"
+            ></p-button>
+          </a>
+        </div>
+
+        <div class="form-actions">
+          <a routerLink="/">
+            <p-button link>
+              {{ "common.back" | translate }}
+            </p-button>
+          </a>
+
+          <a routerLink="/forgot-password">
+            <p-button link>
+              {{ "auth.forgot_password" | translate }}
+            </p-button>
+          </a>
+        </div>
+      </form>
+    </p-card>
+  </section>
+</div>

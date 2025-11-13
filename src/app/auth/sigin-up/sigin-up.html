@@ -1,0 +1,186 @@
+<div class="grid-2">
+  <section class="default-gradient section-sapce">
+    <div class="text-layout">
+      <h1 class="text-h1">
+        {{ "common.welcome_system" | translate }}
+      </h1>
+      <p
+        class="text-h4 c-neutral-100"
+        [innerHTML]="
+          'common.system_description' | translate : {} : 'c-neutral-900'
+        "
+      ></p>
+
+      <span class="text-h5 c-neutral-100">{{
+        "common.call_to_action" | translate
+      }}</span>
+    </div>
+  </section>
+  <section class="section-sapce">
+    <p-card class="form-container">
+      <ng-template #title>
+        <h2 class="text-h2" style="margin: 0">
+          {{ "auth.sign_up_title" | translate }}
+        </h2>
+      </ng-template>
+      <ng-template #subtitle>
+        <h2 class="text-h5" style="margin: 0">
+          {{ "auth.sign_up_subtitle" | translate }}
+        </h2>
+      </ng-template>
+
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        @if (errorMessage()) {
+        <p-message severity="error" styleClass="w-full mb-3">
+          {{ errorMessage() }}
+        </p-message>
+        }
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="email">{{ "auth.email" | translate }}</label>
+            <input
+              pInputText
+              id="email"
+              type="email"
+              formControlName="email"
+              [placeholder]="'auth.email_placeholder' | translate"
+              [invalid]="
+                signUpForm.get('email')?.invalid &&
+                signUpForm.get('email')?.touched
+              "
+            />
+            @if (signUpForm.get('email')?.invalid &&
+            signUpForm.get('email')?.touched) {
+            <p-message severity="error" size="small" variant="simple">
+              @if (signUpForm.get('email')?.hasError('required')) {
+              {{ "forms.required_field" | translate }}
+              } @if (signUpForm.get('email')?.hasError('email')) {
+              {{ "forms.invalid_email" | translate }}
+              }
+            </p-message>
+            }
+          </div>
+
+          <!-- Telefone -->
+          <div class="form-field">
+            <label for="userName">{{ "auth.userName" | translate }}</label>
+            <input
+              pInputText
+              id="userName"
+              formControlName="userName"
+              [placeholder]="'auth.userName_placeholder' | translate"
+              [invalid]="
+                signUpForm.get('userNamer')?.invalid &&
+                signUpForm.get('userNamer')?.touched
+              "
+            />
+            @if (signUpForm.get('userNamer')?.invalid &&
+            signUpForm.get('userNamer')?.touched) {
+            <p-message severity="error" size="small" variant="simple">
+              {{ "forms.required_field" | translate }}
+            </p-message>
+            }
+          </div>
+
+          <!-- Senha -->
+          <div class="form-field">
+            <label for="password">{{ "auth.password" | translate }}</label>
+            <input
+              pInputText
+              id="password"
+              type="password"
+              formControlName="password"
+              [placeholder]="'auth.password_placeholder' | translate"
+              [invalid]="
+                signUpForm.get('password')?.invalid &&
+                signUpForm.get('password')?.touched
+              "
+            />
+            @if (signUpForm.get('password')?.invalid &&
+            signUpForm.get('password')?.touched) {
+            <div style="display: flex; flex-direction: column; gap: 0.5rem">
+              @if (signUpForm.get('password')?.hasError('required')) {
+              <p-message severity="error" size="small" variant="simple">
+                {{ "forms.required_field" | translate }}
+              </p-message>
+              } @if (signUpForm.get('password')?.hasError('minlength')) {
+              <p-message severity="error" size="small" variant="simple">
+                {{ "forms.password_min_length" | translate : { min: "6" } }}
+              </p-message>
+              } @if (signUpForm.get('password')?.hasError('noNonAlphanumeric'))
+              {
+              <p-message severity="error" size="small" variant="simple">
+                {{ "forms.password_no_non_alphanumeric" | translate }}
+              </p-message>
+              } @if (signUpForm.get('password')?.hasError('noLowercase')) {
+              <p-message severity="error" size="small" variant="simple">
+                {{ "forms.password_no_lowercase" | translate }}
+              </p-message>
+              } @if (signUpForm.get('password')?.hasError('noUppercase')) {
+              <p-message severity="error" size="small" variant="simple">
+                {{ "forms.password_no_uppercase" | translate }}
+              </p-message>
+              }
+            </div>
+            }
+          </div>
+
+          <!-- Confirmar Senha -->
+          <div class="form-field">
+            <label for="confirmPassword">{{
+              "auth.confirm_password" | translate
+            }}</label>
+            <input
+              pInputText
+              id="confirmPassword"
+              type="password"
+              formControlName="confirmPassword"
+              [placeholder]="'auth.confirm_password_placeholder' | translate"
+              [invalid]="
+                (signUpForm.get('confirmPassword')?.invalid &&
+                  signUpForm.get('confirmPassword')?.touched) ||
+                (signUpForm.hasError('passwordMismatch') &&
+                  signUpForm.get('confirmPassword')?.touched)
+              "
+            />
+            @if (signUpForm.get('confirmPassword')?.invalid &&
+            signUpForm.get('confirmPassword')?.touched) {
+            <p-message severity="error" size="small" variant="simple">
+              {{ "forms.required_field" | translate }}
+            </p-message>
+            } @if (signUpForm.hasError('passwordMismatch') &&
+            signUpForm.get('confirmPassword')?.touched &&
+            !signUpForm.get('confirmPassword')?.hasError('required')) {
+            <p-message severity="error" size="small" variant="simple">
+              {{ "forms.passwords_not_match" | translate }}
+            </p-message>
+            }
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <p-button
+            type="submit"
+            [label]="'auth.create_account' | translate"
+            [loading]="isLoading"
+            [disabled]="isLoading"
+          ></p-button>
+
+          <a routerLink="/sigin-in">
+            <p-button
+              severity="secondary"
+              [label]="'auth.already_have_account' | translate"
+            ></p-button>
+          </a>
+        </div>
+        <div class="form-actions">
+          <a routerLink="/">
+            <p-button link>
+              {{ "common.back" | translate }}
+            </p-button>
+          </a>
+        </div>
+      </form>
+    </p-card>
+  </section>
+</div>

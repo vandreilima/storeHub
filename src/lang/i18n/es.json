@@ -1,0 +1,123 @@
+{
+  "common": {
+    "welcome_system": "¡Bienvenido a StoreHub!",
+    "system_description": "Tu tienda de artículos generales favorita. Encuentra <span>productos de calidad</span> con los <span>mejores precios</span> y <span>atención personalizada</span>. Todo lo que necesitas, en un solo lugar.",
+    "call_to_action": "¡Crea tu cuenta y empieza a comprar ahora!",
+    "back": "Volver"
+  },
+  "navigation": {
+    "dashboard": "Panel",
+    "shop": "Tienda",
+    "users": "Usuarios",
+    "logout": "Salir"
+  },
+  "messages": {
+    "success": "�Operaci�n realizada con �xito!",
+    "error": "Ocurri� un error. Int�ntalo de nuevo.",
+    "confirm_delete": "�Est�s seguro de que deseas eliminar este elemento?",
+    "no_data": "No se encontraron datos",
+    "loading_data": "Cargando datos..."
+  },
+  "auth": {
+    "sign_up_title": "Crear Cuenta",
+    "sign_up_subtitle": "Completa los datos b�sicos para comenzar",
+    "sign_in_title": "Iniciar Sesi�n",
+    "sign_in_subtitle": "Accede a tu cuenta para continuar",
+    "login_welcome": "¡Bienvenido de nuevo!",
+    "login_description": "Accede a tu <span>cuenta de StoreHub</span> y continúa <span>disfrutando de las mejores ofertas</span>. Rastrea tus <span>pedidos</span> y accede a <span>promociones exclusivas</span>.",
+    "login_call_to_action": "¡Inicia sesión ahora y disfruta de nuestras ofertas!",
+    "company_name": "Nombre de la Empresa",
+    "company_name_placeholder": "Ingresa el nombre de tu empresa",
+    "responsible_name": "Nombre del Responsable",
+    "responsible_name_placeholder": "Ingresa tu nombre completo",
+    "email": "Correo Electr�nico",
+    "email_placeholder": "Ingresa tu correo electr�nico",
+    "phoneNumber": "Teléfono",
+    "phone_placeholder": "Ingresa tu teléfono",
+    "userName": "Nombre de Usuario",
+    "userName_placeholder": "Ingresa tu nombre de usuario",
+    "password": "Contrase�a",
+    "password_placeholder": "Ingresa tu contrase�a",
+    "confirm_password": "Confirmar Contrase�a",
+    "confirm_password_placeholder": "Confirma tu contrase�a",
+    "create_account": "Crear Cuenta",
+    "sign_in": "Iniciar Sesi�n",
+    "already_have_account": "Ya tengo cuenta",
+    "dont_have_account": "�No tienes cuenta?",
+    "forgot_password": "Olvid� mi contrase�a",
+    "forgot_password_title": "Recuperar Contrase�a",
+    "forgot_password_subtitle": "Ingresa tu correo electr�nico para recibir instrucciones de recuperaci�n",
+    "forgot_password_description": "�No te preocupes! Ingresa tu <span>correo electr�nico registrado</span> y te enviaremos un <span>enlace seguro</span> para restablecer tu contrase�a y volver a acceder a tu cuenta.",
+    "forgot_password_call_to_action": "�Recupera el acceso a tu cuenta en pocos clics!",
+    "send_reset_link": "Enviar Enlace de Recuperaci�n",
+    "back_to_login": "Volver al Inicio de Sesi�n",
+    "reset_email_sent": "�Correo enviado con �xito!",
+    "reset_email_sent_message": "Enviamos un enlace de recuperaci�n al correo electr�nico proporcionado. Verifica tu bandeja de entrada y carpeta de spam.",
+    "check_email": "Verificar Correo",
+    "resend_email": "Reenviar Correo",
+    "email_not_found": "Correo no encontrado",
+    "email_not_found_message": "No encontramos una cuenta registrada con este correo electr�nico. Verifica si lo escribiste correctamente o crea una nueva cuenta."
+  },
+  "forms": {
+    "required_field": "Este campo es obligatorio",
+    "invalid_email": "Correo electr�nico inv�lido",
+    "password_min_length": "La contrase�a debe tener al menos {{min}} caracteres",
+    "password_no_non_alphanumeric": "La contrase�a debe tener al menos un car�cter no alfanum�rico (ej: @, #, $, %, &, *)",
+    "password_no_lowercase": "La contrase�a debe tener al menos una letra min�scula (a-z)",
+    "password_no_uppercase": "La contrase�a debe tener al menos una letra may�scula (A-Z)",
+    "passwords_not_match": "Las contrase�as no coinciden",
+    "invalid_cnpj": "CNPJ inv�lido",
+    "invalid_cpf": "CPF inv�lido",
+    "register_success": "�Registro realizado con �xito!",
+    "register_error": "Error al realizar el registro",
+    "login_error": "Contrase�a o correo incorrectos"
+  },
+  "indentity": {
+    "defaultError": "Ocurri� un error desconocido",
+    "concurrencyFailure": "Fallo de concurrencia optimista, el objeto fue modificado",
+    "passwordMismatch": "Contrase�a incorrecta",
+    "invalidToken": "Token inv�lido",
+    "loginAlreadyAssociated": "Ya existe un usuario con este inicio de sesi�n",
+    "invalidUserName": "El inicio de sesi�n es inv�lido, solo puede contener letras o d�gitos",
+    "invalidEmail": "El correo electr�nico es inv�lido",
+    "duplicateUserName": "El inicio de sesi�n ya est� en uso",
+    "duplicateEmail": "El correo electr�nico ya est� en uso",
+    "userNotInRole": "El usuario no tiene permiso",
+    "passwordTooShort": "Las contrase�as deben contener al menos {length} caracteres",
+    "passwordRequiresNonAlphanumeric": "Las contrase�as deben contener al menos un car�cter no alfanum�rico",
+    "passwordRequiresDigit": "Las contrase�as deben contener al menos un d�gito ('0'-'9')",
+    "passwordRequiresLower": "Las contrase�as deben contener al menos un car�cter en min�scula ('a'-'z')",
+    "passwordRequiresUpper": "Las contrase�as deben contener al menos un car�cter en may�scula ('A'-'Z')"
+  },
+  "main": {
+    "search_placeholder": "Buscar...",
+    "notifications": "Notificaciones",
+    "help": "Ayuda",
+    "logout": "Salir",
+    "shop_logo": "Logo de la tienda"
+  },
+  "welcome": {
+    "hero_title": "Bienvenido a",
+    "hero_title_highlight": "StoreHub",
+    "hero_subtitle": "Tu tienda de artículos generales con los mejores productos y precios. Todo lo que necesitas en un solo lugar.",
+    "start_now": "Comenzar Ahora",
+    "see_demo": "Ver Demostraci�n"
+  },
+  "products": {
+    "title": "Nuestros Productos",
+    "loading": "Cargando productos...",
+    "no_products": "No hay productos disponibles en este momento",
+    "add_to_cart": "Agregar al Carrito"
+  },
+  "shop": {
+    "filters": {
+      "search": "Buscar",
+      "searchPlaceholder": "Buscar productos...",
+      "rating": "Calificación",
+      "category": "Categorías",
+      "categoryPlaceholder": "Selecciona las categorías",
+      "apply": "Aplicar Filtros",
+      "clear": "Limpiar Filtros"
+    }
+  }
+}

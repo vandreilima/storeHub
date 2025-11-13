@@ -1,0 +1,113 @@
+:root {
+  --primary-25: #fefcfb;
+  --primary-50: #fef7f4;
+  --primary-100: #fdeee8;
+  --primary-200: #fad5c6;
+  --primary-300: #f7bca4;
+  --primary-400: #f49060;
+  --primary-500: #f26938;
+  --primary-600: #e55a2c;
+  --primary-700: #c44a1f;
+  --primary-800: #a33b15;
+  --primary-900: #822f0e;
+  --primary-950: #6b2409;
+
+  --auxiliary-base: #f24141;
+
+  --success-color: #10b981;
+  --warning-color: #f59e0b;
+  --error-color: #f24141;
+  --info-color: #3b82f6;
+
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+  --neutral-950: #0a0a0a;
+
+  --background-default: #f2f2f2;
+  --surface-default: #ffffff;
+
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-24: 96px;
+
+  --border-radius-sm: 2px;
+  --border-radius-base: 4px;
+  --border-radius-md: 6px;
+  --border-radius-lg: 8px;
+  --border-radius-xl: 12px;
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-base: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  --font-family-primary: "Roboto Condensed", sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 30px;
+  --font-size-4xl: 36px;
+  --font-size-5xl: 48px;
+}
+
+// Customizações adicionais para componentes específicos
+// que não são cobertas pelo preset do tema
+.p-button {
+  font-family: var(--font-family-primary);
+  font-weight: 500;
+}
+
+.p-inputtext,
+.p-dropdown,
+.p-multiselect {
+  font-family: var(--font-family-primary);
+}
+
+// algumas melhorias nos card
+.p-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--neutral-200);
+}
+
+.small-card {
+  .p-card-body {
+    padding: var(--spacing-2) var(--spacing-3) !important;
+  }
+
+  .p-card-content {
+    padding: 0 !important;
+  }
+}
+
+.p-card-body {
+  height: 100%;
+}
+
+.p-card-footer {
+  margin-top: auto;
+}
+
+.p-dialog {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

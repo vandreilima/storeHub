@@ -1,1 +1,647 @@
-/* You can add global styles to this file, and also import other style files */
+@use "./styles/primeng-theme.scss";
+
+// Import Google Fonts - Roboto Condensed and Inter
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@import "primeicons/primeicons.css";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--neutral-800);
+  background-color: var(--background-default);
+}
+
+// Typography classes based on design tokens
+.text-h1 {
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-h2 {
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-h3 {
+  font-size: var(--font-size-3xl);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-h4 {
+  font-size: var(--font-size-2xl);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-h5 {
+  font-size: var(--font-size-xl);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-h6 {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--neutral-900);
+}
+
+.text-body-large {
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-body-base {
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-body-small {
+  font-size: var(--font-size-sm);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.text-caption {
+  font-size: var(--font-size-xs);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--neutral-600);
+}
+
+// Utility classes for spacing
+.p-1 {
+  padding: var(--spacing-1);
+}
+.p-2 {
+  padding: var(--spacing-2);
+}
+.p-3 {
+  padding: var(--spacing-3);
+}
+.p-4 {
+  padding: var(--spacing-4);
+}
+.p-6 {
+  padding: var(--spacing-6);
+}
+.p-8 {
+  padding: var(--spacing-8);
+}
+
+.m-1 {
+  margin: var(--spacing-1);
+}
+.m-2 {
+  margin: var(--spacing-2);
+}
+.m-3 {
+  margin: var(--spacing-3);
+}
+.m-4 {
+  margin: var(--spacing-4);
+}
+.m-6 {
+  margin: var(--spacing-6);
+}
+.m-8 {
+  margin: var(--spacing-8);
+}
+
+.c-neutral-100 {
+  color: var(--neutral-100) !important;
+}
+
+.c-neutral-900 {
+  color: var(--neutral-900) !important;
+}
+
+.default-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--primary-500) 0%,
+    var(--primary-600) 100%
+  );
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100dvh;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+// ============================================
+// GLOBAL COMPONENT STYLES
+// ============================================
+
+// Common Page Layouts
+.page-container {
+  padding: var(--spacing-6);
+  background-color: var(--surface-ground);
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-6);
+  gap: var(--spacing-4);
+
+  .header-content {
+    h2 {
+      font-family: var(--font-family-primary);
+      font-size: 1.875rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin: 0 0 var(--spacing-2) 0;
+    }
+
+    p {
+      color: var(--text-color-secondary);
+      margin: 0;
+      font-size: 0.975rem;
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    gap: var(--spacing-3);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-3);
+
+    .header-actions {
+      align-self: flex-start;
+    }
+  }
+}
+
+// Common Form Styles
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4);
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+
+  label {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .error-message {
+    color: var(--error-color);
+    font-size: var(--font-size-xs);
+    margin-top: var(--spacing-1);
+  }
+}
+
+// Common Dialog Styles
+.dialog-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  h3 {
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-xl);
+    font-weight: 500;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  .dialog-close-btn {
+    background: none;
+    border: none;
+    color: var(--text-color-secondary);
+    cursor: pointer;
+    padding: var(--spacing-2);
+    border-radius: var(--border-radius-base);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+
+    &:hover {
+      background-color: var(--surface-hover);
+      color: var(--text-color);
+    }
+
+    i {
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  margin-top: var(--spacing-6);
+  padding-top: var(--spacing-6);
+  border-top: 1px solid var(--surface-border);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .p-button {
+      width: 100%;
+    }
+  }
+}
+
+// Common Table Styles
+.data-table-card {
+  background: var(--surface-default);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--neutral-200);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  .p-card-body {
+    padding: 0;
+  }
+
+  .p-card-content {
+    padding: 0;
+  }
+}
+
+// Empty State
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-12) var(--spacing-6);
+
+  .empty-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .empty-icon {
+      font-size: var(--font-size-5xl);
+      color: var(--neutral-400);
+      margin-bottom: var(--spacing-4);
+    }
+
+    h3 {
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-xl);
+      font-weight: 500;
+      color: var(--neutral-700);
+      margin: 0 0 var(--spacing-2) 0;
+    }
+
+    p {
+      color: var(--neutral-500);
+      font-size: var(--font-size-sm);
+      margin: 0 0 var(--spacing-6) 0;
+    }
+  }
+}
+
+// Action Buttons
+.actions-column {
+  width: 120px;
+  text-align: center;
+}
+
+.action-buttons {
+  display: flex;
+  gap: var(--spacing-1);
+  justify-content: center;
+
+  .p-button {
+    width: 32px;
+    height: 32px;
+
+    .p-button-icon {
+      font-size: var(--font-size-sm);
+    }
+  }
+}
+
+// Link Styles
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  background: none;
+  border: none;
+  color: #25d366;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--border-radius-base);
+  font-family: var(--font-family-primary);
+  font-size: var(--font-size-sm);
+
+  &:hover {
+    color: #128c7e;
+    background-color: rgba(37, 211, 102, 0.1);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  i {
+    font-size: var(--font-size-sm);
+  }
+}
+
+.email-link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--primary-500);
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--primary-600);
+    text-decoration: underline;
+  }
+
+  i {
+    font-size: var(--font-size-xs);
+  }
+}
+
+// ============================================
+// PRIMENG GLOBAL OVERRIDES
+// ============================================
+
+.p-button {
+  border-radius: var(--border-radius-base);
+  font-weight: 500;
+  font-size: var(--font-size-base);
+  padding: var(--spacing-3) var(--spacing-6);
+  font-family: var(--font-family-primary);
+  transition: all 0.2s ease;
+
+  &.p-button-primary {
+    background-color: var(--primary-500);
+    border-color: var(--primary-500);
+
+    &:hover {
+      background-color: var(--primary-600);
+      border-color: var(--primary-600);
+    }
+
+    &:active {
+      background-color: var(--primary-700);
+      border-color: var(--primary-700);
+    }
+  }
+
+  &.p-button-danger {
+    color: var(--error-color);
+
+    &:hover {
+      background-color: rgba(242, 65, 65, 0.1);
+    }
+  }
+}
+
+.p-inputtext {
+  border-radius: var(--border-radius-base);
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  font-family: var(--font-family-primary);
+  border: 1px solid var(--neutral-300);
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 2px var(--primary-100);
+  }
+
+  &.ng-invalid.ng-touched {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 2px rgba(242, 65, 65, 0.1);
+  }
+
+  &::placeholder {
+    color: var(--neutral-400);
+  }
+}
+
+.p-dialog {
+  border-radius: var(--border-radius-xl);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+
+  .p-dialog-header {
+    background: var(--surface-default);
+    border-bottom: 1px solid var(--neutral-200);
+    padding: var(--spacing-6);
+
+    .p-dialog-title {
+      font-family: var(--font-family-primary);
+      font-size: var(--font-size-xl);
+      font-weight: 500;
+      color: var(--neutral-900);
+    }
+  }
+
+  .p-dialog-content {
+    padding: var(--spacing-6);
+    background: var(--surface-default);
+  }
+}
+
+.p-datatable {
+  .p-datatable-header {
+    background: var(--surface-default);
+    border: none;
+    padding: var(--spacing-6);
+    border-bottom: 1px solid var(--neutral-200);
+  }
+
+  .p-datatable-thead > tr > th {
+    background: var(--neutral-50);
+    border: none;
+    border-bottom: 1px solid var(--neutral-200);
+    padding: var(--spacing-4) var(--spacing-6);
+    font-family: var(--font-family-primary);
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: var(--font-size-sm);
+  }
+
+  .p-datatable-tbody > tr > td {
+    border: none;
+    border-bottom: 1px solid var(--neutral-100);
+    padding: var(--spacing-4) var(--spacing-6);
+    font-size: var(--font-size-sm);
+    color: var(--text-color);
+  }
+
+  .p-datatable-tbody > tr:hover {
+    background: var(--surface-hover);
+  }
+
+  .p-paginator {
+    border: none;
+    border-top: 1px solid var(--neutral-200);
+    background: var(--surface-default);
+    padding: var(--spacing-4) var(--spacing-6);
+  }
+}
+
+.p-card {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--neutral-200);
+}
+
+// Toast and Confirmation Dialogs
+.p-toast {
+  z-index: 9999;
+
+  .p-toast-message {
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 1px solid var(--neutral-200);
+
+    .p-toast-message-content {
+      .p-toast-summary {
+        color: var(--neutral-900);
+        font-weight: 600;
+      }
+
+      .p-toast-detail {
+        color: var(--neutral-700);
+      }
+    }
+
+    .p-toast-icon-close {
+      color: var(--neutral-600);
+
+      &:hover {
+        color: var(--neutral-900);
+      }
+    }
+
+    &.p-toast-message-success {
+      .p-toast-message-icon {
+        color: var(--success-color);
+      }
+    }
+
+    &.p-toast-message-error {
+      .p-toast-message-icon {
+        color: var(--error-color);
+      }
+    }
+
+    &.p-toast-message-warn {
+      .p-toast-message-icon {
+        color: var(--warning-color);
+      }
+    }
+
+    &.p-toast-message-info {
+      .p-toast-message-icon {
+        color: var(--info-color);
+      }
+    }
+  }
+}
+
+.p-confirm-dialog {
+  .p-dialog-header {
+    .p-dialog-title {
+      color: var(--neutral-900);
+    }
+  }
+
+  .p-confirm-dialog-message {
+    font-family: var(--font-family-primary);
+    color: var(--neutral-800);
+  }
+}
+
+// Responsive utilities
+@media (max-width: 768px) {
+  .page-container {
+    padding: var(--spacing-4);
+  }
+
+  .p-datatable {
+    .p-datatable-thead > tr > th,
+    .p-datatable-tbody > tr > td {
+      padding: var(--spacing-2);
+      font-size: 0.875rem;
+    }
+  }
+}
+
+.form-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.form-actions {
+  margin-top: var(--spacing-6);
+  display: flex;
+  gap: 16px;
+}
+
+.ratting {
+  height: 44px;
+}

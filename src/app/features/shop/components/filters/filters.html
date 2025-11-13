@@ -1,0 +1,53 @@
+@if(!!form) {
+<form [formGroup]="form!">
+  <section class="wrapper-filter">
+    <div class="field">
+      <label for="textSearch">{{ "shop.filters.search" | translate }}</label>
+      <p-iconfield iconPosition="left">
+        <p-inputicon class="pi pi-search" />
+        <input
+          pInputText
+          class="text-search"
+          id="textSearch"
+          formControlName="textSearch"
+          [placeholder]="'shop.filters.searchPlaceholder' | translate"
+        />
+      </p-iconfield>
+    </div>
+
+    <div class="form-field">
+      <label for="category">{{ "shop.filters.category" | translate }}</label>
+      <p-multiSelect
+        id="category"
+        formControlName="category"
+        [options]="[]"
+        optionLabel="name"
+        optionValue="id"
+        [placeholder]="'shop.filters.categoryPlaceholder' | translate"
+        [showClear]="true"
+        display="chip"
+      />
+    </div>
+
+    <div class="form-field">
+      <label for="rating">{{ "shop.filters.rating" | translate }}</label>
+      <p-rating
+        id="rating"
+        class="ratting"
+        formControlName="rating"
+        [stars]="5"
+      />
+    </div>
+
+    <div class="filter-actions">
+      <!-- <p-button
+        [label]="'shop.filters.clear' | translate"
+        icon="pi pi-times"
+        severity="secondary"
+        (onClick)="clearFilters()"
+        [text]="true"
+      /> -->
+    </div>
+  </section>
+</form>
+}

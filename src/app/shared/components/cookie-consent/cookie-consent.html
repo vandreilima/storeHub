@@ -1,0 +1,42 @@
+@if (showBanner()) {
+  <div class="cookie-consent">
+    <div class="cookie-consent__container">
+      <div class="cookie-consent__content">
+        <div class="cookie-consent__icon">
+          <i class="pi pi-info-circle"></i>
+        </div>
+
+        <div class="cookie-consent__text">
+          <h3 class="cookie-consent__title">Privacidade e Cookies</h3>
+          <p class="cookie-consent__description">
+            Utilizamos cookies essenciais para o funcionamento do sistema e
+            cookies de análise (Microsoft Clarity) para melhorar sua
+            experiência. Você pode escolher aceitar todos ou apenas os
+            essenciais.
+          </p>
+          <p class="cookie-consent__link">
+            <a routerLink="/privacy-policy" class="link">
+              Saiba mais sobre nossa Política de Privacidade
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="cookie-consent__actions">
+        <p-button
+          label="Aceitar Todos"
+          severity="primary"
+          (click)="acceptAll()"
+          styleClass="cookie-consent__button"
+        />
+        <p-button
+          label="Apenas Essenciais"
+          severity="secondary"
+          [outlined]="true"
+          (click)="acceptEssentialOnly()"
+          styleClass="cookie-consent__button"
+        />
+      </div>
+    </div>
+  </div>
+}

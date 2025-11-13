@@ -1,0 +1,117 @@
+{
+  "common": {
+    "welcome_system": "Bem-vindo ao StoreHub!",
+    "system_description": "Sua loja de artigos gerais favorita. Encontre <span>produtos de qualidade</span> com os <span>melhores preços</span> e <span>atendimento personalizado</span>. Tudo o que você precisa, em um só lugar.",
+    "call_to_action": "Crie sua conta e comece a comprar agora!",
+    "back": "Voltar"
+  },
+  "navigation": {
+    "dashboard": "Painel",
+    "shop": "Loja",
+    "users": "usuarios",
+    "logout": "Sair"
+  },
+  "messages": {
+    "success": "Operação realizada com sucesso!",
+    "error": "Ocorreu um erro. Tente novamente.",
+    "confirm_delete": "Tem certeza que deseja excluir este item?",
+    "no_data": "Nenhum dado encontrado",
+    "loading_data": "Carregando dados..."
+  },
+  "auth": {
+    "sign_up_title": "Criar Conta",
+    "sign_up_subtitle": "Preencha os dados básicos para começar",
+    "sign_in_title": "Entrar",
+    "sign_in_subtitle": "Acesse sua conta para continuar",
+    "login_welcome": "Bem-vindo de volta!",
+    "login_description": "Acesse sua <span>conta no StoreHub</span> e continue <span>aproveitando as melhores ofertas</span>. Acompanhe seus <span>pedidos</span> e tenha acesso a <span>promoções exclusivas</span>.",
+    "login_call_to_action": "Entre agora e aproveite nossas ofertas!",
+    "email": "E-mail",
+    "email_placeholder": "Digite seu e-mail",
+    "userName": "Nome de Usuário",
+    "userName_placeholder": "Digite seu nome de usuário",
+    "password": "Senha",
+    "password_placeholder": "Digite sua senha",
+    "confirm_password": "Confirmar Senha",
+    "confirm_password_placeholder": "Confirme sua senha",
+    "create_account": "Criar Conta",
+    "sign_in": "Entrar",
+    "already_have_account": "Já tenho conta",
+    "dont_have_account": "Não tem conta?",
+    "forgot_password": "Esqueci minha senha",
+    "forgot_password_title": "Recuperar Senha",
+    "forgot_password_subtitle": "Digite seu e-mail para receber instruções de recuperação",
+    "forgot_password_description": "Não se preocupe! Digite seu <span>e-mail cadastrado</span> e enviaremos um <span>link seguro</span> para você redefinir sua senha e voltar a acessar sua conta.",
+    "forgot_password_call_to_action": "Recupere o acesso à sua conta em poucos cliques!",
+    "send_reset_link": "Enviar Link de Recuperação",
+    "back_to_login": "Voltar ao Login",
+    "reset_email_sent": "E-mail enviado com sucesso!",
+    "reset_email_sent_message": "Enviamos um link de recuperação para o e-mail informado. Verifique sua caixa de entrada e spam.",
+    "check_email": "Verificar E-mail",
+    "resend_email": "Reenviar E-mail",
+    "email_not_found": "E-mail não encontrado",
+    "email_not_found_message": "Não encontramos uma conta cadastrada com este e-mail. Verifique se digitou corretamente ou crie uma nova conta."
+  },
+  "forms": {
+    "required_field": "Este campo é obrigatório",
+    "invalid_email": "Email inválido",
+    "password_min_length": "A senha deve ter pelo menos {{min}} caracteres",
+    "password_no_non_alphanumeric": "A senha deve ter pelo menos um caractere não alfanumérico (ex: @, #, $, %, &, *)",
+    "password_no_lowercase": "A senha deve ter pelo menos uma letra minúscula (a-z)",
+    "password_no_uppercase": "A senha deve ter pelo menos uma letra maiúscula (A-Z)",
+    "passwords_not_match": "As senhas não coincidem",
+    "invalid_cnpj": "CNPJ inválido",
+    "invalid_cpf": "CPF inválido",
+    "register_success": "Cadastro realizado com sucesso!",
+    "register_error": "Erro ao realizar cadastro",
+    "login_error": "Senha ou e-mail incorretos"
+  },
+  "indentity": {
+    "defaultError": "Ocorreu um erro desconhecido",
+    "concurrencyFailure": "Falha de concorrência otimista, o objeto foi modificado",
+    "passwordMismatch": "Senha incorreta",
+    "invalidToken": "Token inválido",
+    "loginAlreadyAssociated": "Já existe um usuário com este login",
+    "invalidUserName": "Login é inválido, pode conter apenas letras ou dígitos",
+    "invalidEmail": "Email é inválido",
+    "duplicateUserName": "Login já está sendo utilizado",
+    "duplicateEmail": "Email já está sendo utilizado",
+    "userNotInRole": "Usuário não tem a permissão",
+    "passwordTooShort": "Senhas devem conter ao menos {length} caracteres",
+    "passwordRequiresNonAlphanumeric": "Senhas devem conter ao menos um caracter não alfanumérico",
+    "passwordRequiresDigit": "Senhas devem conter ao menos um dígito ('0'-'9')",
+    "passwordRequiresLower": "Senhas devem conter ao menos um caracter em caixa baixa ('a'-'z')",
+    "passwordRequiresUpper": "Senhas devem conter ao menos um caracter em caixa alta ('A'-'Z')"
+  },
+  "main": {
+    "search_placeholder": "Buscar...",
+    "notifications": "Notificações",
+    "help": "Ajuda",
+    "logout": "Sair",
+    "shop_logo": "Logo da loja"
+  },
+  "welcome": {
+    "hero_title": "Bem-vindo ao",
+    "hero_title_highlight": "StoreHub",
+    "hero_subtitle": "Sua loja de artigos gerais com os melhores produtos e preços. Tudo o que você precisa em um só lugar.",
+    "start_now": "Começar Agora",
+    "see_demo": "Ver Demonstração"
+  },
+  "products": {
+    "title": "Nossos Produtos",
+    "loading": "Carregando produtos...",
+    "no_products": "Nenhum produto disponível no momento",
+    "add_to_cart": "Adicionar ao Carrinho"
+  },
+  "shop": {
+    "filters": {
+      "search": "Buscar",
+      "searchPlaceholder": "Buscar produtos...",
+      "rating": "Avaliação",
+      "category": "Categorias",
+      "categoryPlaceholder": "Selecione as categorias",
+      "apply": "Aplicar Filtros",
+      "clear": "Limpar Filtros"
+    }
+  }
+}

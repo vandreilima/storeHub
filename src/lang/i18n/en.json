@@ -1,0 +1,123 @@
+{
+  "common": {
+    "welcome_system": "Welcome to StoreHub!",
+    "system_description": "Your favorite general goods store. Find <span>quality products</span> with the <span>best prices</span> and <span>personalized service</span>. Everything you need, all in one place.",
+    "call_to_action": "Create your account and start shopping now!",
+    "back": "Back"
+  },
+  "navigation": {
+    "dashboard": "Dashboard",
+    "shop": "Shop",
+    "users": "Users",
+    "logout": "Logout"
+  },
+  "messages": {
+    "success": "Operation completed successfully!",
+    "error": "An error occurred. Please try again.",
+    "confirm_delete": "Are you sure you want to delete this item?",
+    "no_data": "No data found",
+    "loading_data": "Loading data..."
+  },
+  "auth": {
+    "sign_up_title": "Create Account",
+    "sign_up_subtitle": "Fill in the basic information to get started",
+    "sign_in_title": "Sign In",
+    "sign_in_subtitle": "Access your account to continue",
+    "login_welcome": "Welcome back!",
+    "login_description": "Access your <span>StoreHub account</span> and continue <span>enjoying the best deals</span>. Track your <span>orders</span> and get access to <span>exclusive promotions</span>.",
+    "login_call_to_action": "Sign in now and enjoy our offers!",
+    "company_name": "Company Name",
+    "company_name_placeholder": "Enter your company name",
+    "responsible_name": "Responsible Name",
+    "responsible_name_placeholder": "Enter your full name",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "phoneNumber": "Phone",
+    "phone_placeholder": "Enter your phone number",
+    "userName": "Username",
+    "userName_placeholder": "Enter your username",
+    "password": "Password",
+    "password_placeholder": "Enter your password",
+    "confirm_password": "Confirm Password",
+    "confirm_password_placeholder": "Confirm your password",
+    "create_account": "Create Account",
+    "sign_in": "Sign In",
+    "already_have_account": "Already have an account",
+    "dont_have_account": "Don't have an account?",
+    "forgot_password": "Forgot password",
+    "forgot_password_title": "Reset Password",
+    "forgot_password_subtitle": "Enter your email to receive recovery instructions",
+    "forgot_password_description": "Don't worry! Enter your <span>registered email</span> and we'll send you a <span>secure link</span> to reset your password and regain access to your account.",
+    "forgot_password_call_to_action": "Recover access to your account in just a few clicks!",
+    "send_reset_link": "Send Reset Link",
+    "back_to_login": "Back to Login",
+    "reset_email_sent": "Email sent successfully!",
+    "reset_email_sent_message": "We've sent a recovery link to the email address provided. Please check your inbox and spam folder.",
+    "check_email": "Check Email",
+    "resend_email": "Resend Email",
+    "email_not_found": "Email not found",
+    "email_not_found_message": "We couldn't find an account with this email. Please check if you typed it correctly or create a new account."
+  },
+  "forms": {
+    "required_field": "This field is required",
+    "invalid_email": "Invalid email",
+    "password_min_length": "Password must be at least {{min}} characters long",
+    "password_no_non_alphanumeric": "Password must contain at least one non-alphanumeric character (e.g., @, #, $, %, &, *)",
+    "password_no_lowercase": "Password must contain at least one lowercase letter (a-z)",
+    "password_no_uppercase": "Password must contain at least one uppercase letter (A-Z)",
+    "passwords_not_match": "Passwords do not match",
+    "invalid_cnpj": "Invalid CNPJ",
+    "invalid_cpf": "Invalid CPF",
+    "register_success": "Registration completed successfully!",
+    "register_error": "Error during registration",
+    "login_error": "Incorrect password or email"
+  },
+  "indentity": {
+    "defaultError": "An unknown error occurred",
+    "concurrencyFailure": "Optimistic concurrency failure, object was modified",
+    "passwordMismatch": "Incorrect password",
+    "invalidToken": "Invalid token",
+    "loginAlreadyAssociated": "A user with this login already exists",
+    "invalidUserName": "Login is invalid, can only contain letters or digits",
+    "invalidEmail": "Email is invalid",
+    "duplicateUserName": "Login is already in use",
+    "duplicateEmail": "Email is already in use",
+    "userNotInRole": "User does not have permission",
+    "passwordTooShort": "Passwords must contain at least {length} characters",
+    "passwordRequiresNonAlphanumeric": "Passwords must contain at least one non-alphanumeric character",
+    "passwordRequiresDigit": "Passwords must contain at least one digit ('0'-'9')",
+    "passwordRequiresLower": "Passwords must contain at least one lowercase character ('a'-'z')",
+    "passwordRequiresUpper": "Passwords must contain at least one uppercase character ('A'-'Z')"
+  },
+  "main": {
+    "search_placeholder": "Search...",
+    "notifications": "Notifications",
+    "help": "Help",
+    "logout": "Logout",
+    "shop_logo": "Store logo"
+  },
+  "welcome": {
+    "hero_title": "Welcome to",
+    "hero_title_highlight": "StoreHub",
+    "hero_subtitle": "Your general goods store with the best products and prices. Everything you need in one place.",
+    "start_now": "Get Started",
+    "see_demo": "See Demo"
+  },
+  "products": {
+    "title": "Our Products",
+    "loading": "Loading products...",
+    "no_products": "No products available at the moment",
+    "add_to_cart": "Add to Cart"
+  },
+  "shop": {
+    "filters": {
+      "search": "Search",
+      "searchPlaceholder": "Search products...",
+      "rating": "Rating",
+      "category": "Categories",
+      "categoryPlaceholder": "Select categories",
+      "apply": "Apply Filters",
+      "clear": "Clear Filters"
+    }
+  }
+}
