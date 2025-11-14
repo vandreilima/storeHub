@@ -1,4 +1,11 @@
-import { Component, computed, DestroyRef, inject, OnInit, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { LanguageSelectorComponent } from '../../shared/components/language-selector/language-selector.component';
 import { Filters } from '../../shared/components/products/filters/filters';
 import { CommonModule } from '@angular/common';
@@ -26,6 +33,7 @@ import {
 } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ProductsStateService } from '../../shared/services/products/products-state.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -46,6 +54,7 @@ import { ProductsStateService } from '../../shared/services/products/products-st
     ConfirmDialogModule,
     ReactiveFormsModule,
     FormsModule,
+    RouterLink,
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './products.html',
@@ -98,7 +107,7 @@ export class Products implements OnInit {
     if (products.length === 0) return null;
     // Retorna o produto com maior count (mais vendido)
     return products.reduce((prev, current) =>
-      (current.rating.count > prev.rating.count) ? current : prev
+      current.rating.count > prev.rating.count ? current : prev
     );
   });
 

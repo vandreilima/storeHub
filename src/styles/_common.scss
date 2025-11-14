@@ -1,0 +1,123 @@
+.section-space {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-layout {
+  max-width: 470px;
+}
+
+.form-container {
+  max-width: 460px;
+  width: 100%;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-4);
+}
+
+.header-wrapper {
+  position: fixed;
+  display: flex;
+  padding: var(--spacing-4);
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: var(--background-default);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  background: var(--background-default);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-4);
+}
+
+.user-card-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.user-name {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.hero-section {
+  background: linear-gradient(
+    135deg,
+    var(--primary-500) 0%,
+    var(--primary-600) 100%
+  );
+  color: white;
+  padding: calc(var(--spacing-24) + 60px) 0 var(--spacing-16);
+  position: relative;
+  overflow: hidden;
+
+  .container {
+    display: grid;
+    gap: var(--spacing-12);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.products-section {
+  padding: var(--spacing-16) 0;
+  background: var(--background-default);
+}
+
+.product-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+.product-price {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  color: var(--primary-500);
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-size: var(--font-size-sm);
+  color: var(--text-color-secondary);
+  margin-top: var(--spacing-2);
+
+  i {
+    color: var(--warning-color);
+  }
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-12);
+  gap: var(--spacing-4);
+
+  p {
+    color: var(--text-color-secondary);
+    font-size: var(--font-size-lg);
+  }
+}

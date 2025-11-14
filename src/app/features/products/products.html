@@ -1,6 +1,11 @@
 <!-- Hero Section -->
 <div class="header-wrapper">
   <h1 class="text-h1 hero-title m-0">
+    <a routerLink="/">
+      <p-button size="small" [pTooltip]="'Voltar'" tooltipPosition="bottom">
+        <i class="pi pi-arrow-left" pButtonIcon></i>
+      </p-button>
+    </a>
     <span class="brand-text">{{
       "welcome.hero_title_highlight" | translate
     }}</span>
@@ -52,7 +57,9 @@
         <i class="pi pi-shopping-cart stat-icon"></i>
         <div class="stat-content">
           <span class="stat-label">Produto Mais Vendido</span>
-          <span class="stat-value">{{ topSellingProduct()?.title || 'N/A' }}</span>
+          <span class="stat-value">{{
+            topSellingProduct()?.title || "N/A"
+          }}</span>
         </div>
       </div>
     </p-card>
