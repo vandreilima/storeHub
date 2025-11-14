@@ -48,8 +48,8 @@ export class SiginIn {
 
   onSubmit() {
     FORCE_FORM_FEEDBACK(this.signInForm);
-    if (this.signInForm.valid) {
-      console.log('Login form submitted:', this.signInForm.value);
+    if (this.signInForm.invalid) {
+      return;
     }
 
     this.isLoading = true;

@@ -34,6 +34,8 @@ import {
 import { FormsModule } from '@angular/forms';
 import { ProductsStateService } from '../../shared/services/products/products-state.service';
 import { RouterLink } from '@angular/router';
+import { TextareaModule } from 'primeng/textarea';
+import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
 
 @Component({
   selector: 'app-products',
@@ -53,6 +55,7 @@ import { RouterLink } from '@angular/router';
     RatingModule,
     ConfirmDialogModule,
     ReactiveFormsModule,
+    TextareaModule,
     FormsModule,
     RouterLink,
   ],
@@ -92,22 +95,23 @@ export class Products implements OnInit {
     )
   );
 
-  // Variáveis computadas para os cards de estatísticas
   public totalProducts = computed(() => this.allProducts().length);
 
   public averageRating = computed(() => {
     const products = this.allProducts();
     if (products.length === 0) return 0;
-    const sum = products.reduce((acc, product) => acc + product.rating.rate, 0);
+    const sum = products.reduce(
+      (acc, product) => acc + product?.rating?.rate,
+      0
+    );
     return Number((sum / products.length).toFixed(2));
   });
 
   public topSellingProduct = computed(() => {
     const products = this.allProducts();
     if (products.length === 0) return null;
-    // Retorna o produto com maior count (mais vendido)
     return products.reduce((prev, current) =>
-      current.rating.count > prev.rating.count ? current : prev
+      current?.rating?.count > prev?.rating?.count ? current : prev
     );
   });
 
@@ -152,7 +156,7 @@ export class Products implements OnInit {
   }
 
   openProductModal(product?: IProduct): void {
-    this.isEditMode.set(true);
+    this.isEditMode.set(!!product);
     this.selectedProduct.set(product ?? null);
     this.productForm.patchValue({
       id: product?.id ?? null,
@@ -171,26 +175,22 @@ export class Products implements OnInit {
   }
 
   saveProduct(): void {
+    FORCE_FORM_FEEDBACK(this.productForm);
     if (this.productForm.invalid) {
       return;
     }
 
-    const formValue = this.productForm.value;
+    const formValue = this.productForm.getRawValue();
     const productData = {
       title: formValue.title,
       category: formValue.category,
       price: formValue.price,
       image: formValue.image,
       description: formValue.description,
-      rating: {
-        rate: formValue.rate,
-        count: formValue.count,
-      },
     };
 
     if (this.isEditMode()) {
-      // Editar produto existente
-      const product: IProduct = {
+      const product: IProductCreate = {
         id: formValue.id,
         ...productData,
       };
@@ -204,8 +204,8 @@ export class Products implements OnInit {
               summary: 'Sucesso',
               detail: 'Produto atualizado com sucesso!',
             });
-            this.closeModal();
           }
+          this.closeModal();
         },
         error: (error) => {
           this.messageService.add({
@@ -216,7 +216,6 @@ export class Products implements OnInit {
         },
       });
     } else {
-      // Adicionar novo produto
       this.productsStateService.addProduct(productData).subscribe({
         next: (newProduct) => {
           if (newProduct) {
@@ -226,8 +225,8 @@ export class Products implements OnInit {
               summary: 'Sucesso',
               detail: 'Produto adicionado com sucesso!',
             });
-            this.closeModal();
           }
+          this.closeModal();
         },
         error: (error) => {
           this.messageService.add({

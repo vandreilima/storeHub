@@ -12,7 +12,7 @@ export class ProductsService {
 
   private productsCache$: Observable<IProduct[]> | null = null;
 
-  public create(product: Omit<IProduct, 'id'>): Observable<IProduct> {
+  public create(product: Omit<IProductCreate, 'id'>): Observable<IProduct> {
     return this.http.post<IProduct>(this.API_URL, product).pipe(
       tap(() => this.clearCache()),
       catchError((error) => this.handleError(error, 'Erro ao criar produto'))
@@ -20,11 +20,11 @@ export class ProductsService {
   }
 
   public getById(id: number): Observable<IProduct> {
-    return this.http.get<IProduct>(`${this.API_URL}/${id}`).pipe(
-      catchError((error) =>
-        this.handleError(error, 'Erro ao buscar produto')
-      )
-    );
+    return this.http
+      .get<IProduct>(`${this.API_URL}/${id}`)
+      .pipe(
+        catchError((error) => this.handleError(error, 'Erro ao buscar produto'))
+      );
   }
 
   public getByIds(ids: number[]): Observable<IProduct[]> {
@@ -38,11 +38,13 @@ export class ProductsService {
   }
 
   public getAll(): Observable<IProduct[]> {
-    return this.http.get<IProduct[]>(this.API_URL).pipe(
-      catchError((error) =>
-        this.handleError(error, 'Erro ao buscar produtos')
-      )
-    );
+    return this.http
+      .get<IProduct[]>(this.API_URL)
+      .pipe(
+        catchError((error) =>
+          this.handleError(error, 'Erro ao buscar produtos')
+        )
+      );
   }
 
   public getAllCached(): Observable<IProduct[]> {
@@ -52,7 +54,7 @@ export class ProductsService {
     return this.productsCache$;
   }
 
-  public update(id: number, product: IProduct): Observable<IProduct> {
+  public update(id: number, product: IProductCreate): Observable<IProduct> {
     return this.http.put<IProduct>(`${this.API_URL}/${id}`, product).pipe(
       tap(() => this.clearCache()),
       catchError((error) =>
@@ -64,9 +66,7 @@ export class ProductsService {
   public delete(id: number): Observable<IProduct> {
     return this.http.delete<IProduct>(`${this.API_URL}/${id}`).pipe(
       tap(() => this.clearCache()),
-      catchError((error) =>
-        this.handleError(error, 'Erro ao excluir produto')
-      )
+      catchError((error) => this.handleError(error, 'Erro ao excluir produto'))
     );
   }
 

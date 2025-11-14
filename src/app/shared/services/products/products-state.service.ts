@@ -34,7 +34,7 @@ export class ProductsStateService {
   }
 
   public addProduct(
-    product: Omit<IProduct, 'id'>
+    product: Omit<IProductCreate, 'id'>
   ): Observable<IProduct | null> {
     this._loading.set(true);
     this._error.set(null);
@@ -55,7 +55,7 @@ export class ProductsStateService {
 
   public updateProduct(
     id: number,
-    product: IProduct
+    product: IProductCreate
   ): Observable<IProduct | null> {
     this._loading.set(true);
     this._error.set(null);
@@ -63,9 +63,15 @@ export class ProductsStateService {
     return this.productsService.update(id, product).pipe(
       tap((updatedProduct) => {
         const currentProducts = this._products();
-        const updatedProducts = currentProducts.map((p) =>
-          p.id === id ? updatedProduct : p
-        );
+        const updatedProducts = currentProducts.map((p) => {
+          if (p.id === id) {
+            return {
+              ...updatedProduct,
+              rating: updatedProduct.rating ?? p.rating,
+            };
+          }
+          return p;
+        });
         this._products.set(updatedProducts);
         this._loading.set(false);
       }),

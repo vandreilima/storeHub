@@ -120,8 +120,11 @@
           <td>{{ product.price | currency : "BRL" }}</td>
           <td>
             <div style="display: flex; align-items: center; gap: 8px">
-              <p-rating [(ngModel)]="product.rating.rate" [readonly]="true" />
-              <span>({{ product.rating.count }})</span>
+              <p-rating
+                [ngModel]="product?.rating?.rate ?? 0"
+                [readonly]="true"
+              />
+              <span>({{ product?.rating?.count ?? 0 }})</span>
             </div>
           </td>
           <td>
