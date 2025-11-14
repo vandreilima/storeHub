@@ -20,7 +20,6 @@ body {
   background-color: var(--background-default);
 }
 
-// Typography classes based on design tokens
 .text-h1 {
   font-size: var(--font-size-5xl);
   font-weight: 700;
@@ -208,7 +207,6 @@ body {
   }
 }
 
-// Common Form Styles
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -242,7 +240,6 @@ body {
   }
 }
 
-// Common Dialog Styles
 .dialog-header-content {
   display: flex;
   justify-content: space-between;
@@ -299,7 +296,6 @@ body {
   }
 }
 
-// Common Table Styles
 .data-table-card {
   background: var(--surface-default);
   border-radius: var(--border-radius-lg);
@@ -315,7 +311,6 @@ body {
   }
 }
 
-// Empty State
 .empty-state {
   text-align: center;
   padding: var(--spacing-12) var(--spacing-6);
@@ -347,7 +342,6 @@ body {
   }
 }
 
-// Action Buttons
 .actions-column {
   width: 120px;
   text-align: center;
@@ -368,7 +362,6 @@ body {
   }
 }
 
-// Link Styles
 .whatsapp-link {
   display: flex;
   align-items: center;
@@ -416,10 +409,6 @@ body {
     font-size: var(--font-size-xs);
   }
 }
-
-// ============================================
-// PRIMENG GLOBAL OVERRIDES
-// ============================================
 
 .p-button {
   border-radius: var(--border-radius-base);
@@ -610,7 +599,6 @@ body {
   }
 }
 
-// Responsive utilities
 @media (max-width: 768px) {
   .p-datatable {
     .p-datatable-thead > tr > th,

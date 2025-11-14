@@ -1,5 +1,3 @@
-# Internacionalização (i18n) - OsSystem
-
 Este projeto suporta três idiomas:
 
 - 🇧🇷 Português (pt) - Idioma padrão
@@ -11,10 +9,8 @@ Este projeto suporta três idiomas:
 ### 1. No template HTML
 
 ```html
-<!-- Tradução simples -->
 <h1>{{ 'common.welcome' | translate }}</h1>
 
-<!-- Tradução com parâmetros -->
 <p>{{ 'forms.password_min_length' | translate: {min: '8'} }}</p>
 ```
 

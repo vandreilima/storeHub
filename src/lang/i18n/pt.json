@@ -62,8 +62,6 @@
     "password_no_lowercase": "A senha deve ter pelo menos uma letra minúscula (a-z)",
     "password_no_uppercase": "A senha deve ter pelo menos uma letra maiúscula (A-Z)",
     "passwords_not_match": "As senhas não coincidem",
-    "invalid_cnpj": "CNPJ inválido",
-    "invalid_cpf": "CPF inválido",
     "register_success": "Cadastro realizado com sucesso!",
     "register_error": "Erro ao realizar cadastro",
     "login_error": "Senha ou e-mail incorretos"
