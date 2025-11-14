@@ -64,7 +64,12 @@
       <span>Total:</span>
       <span class="total-price">{{ total() | currency : "BRL" }}</span>
     </div>
-    <p-button label="Finalizar Compra" severity="success" styleClass="w-full" />
+    <p-button
+      label="Finalizar Compra"
+      severity="success"
+      styleClass="w-full"
+      disabled
+    />
   </div>
   }
 </p-drawer>

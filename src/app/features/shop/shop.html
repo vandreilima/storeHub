@@ -72,6 +72,9 @@
       </div>
       }
     </div>
+    <div class="hero-illustration">
+      <img src="shop-hero.svg" alt="Shopping illustration" />
+    </div>
   </div>
 </section>
 
@@ -96,11 +99,7 @@
       <p-card class="product-card" (click)="openProductDetail(product.id)">
         <ng-template pTemplate="header">
           <div class="product-image-container">
-            <img
-              [ngSrc]="product.image"
-              [alt]="product.title"
-              fill
-            />
+            <img [ngSrc]="product.image" [alt]="product.title" fill />
           </div>
         </ng-template>
         <div class="product-content">
