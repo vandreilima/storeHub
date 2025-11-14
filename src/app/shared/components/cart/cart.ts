@@ -8,11 +8,13 @@ import {
   inject,
   OnInit,
   computed,
+  DestroyRef,
 } from '@angular/core';
 import { DrawerModule } from 'primeng/drawer';
 import { ButtonModule } from 'primeng/button';
 import { filter, switchMap } from 'rxjs';
 import { CurrencyPipe } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-cart',
@@ -25,6 +27,7 @@ export class Cart implements OnInit {
   private cartStateService = inject(CartStateService);
   private userService = inject(UserService);
   private productsService = inject(ProductsService);
+  private destroyRef = inject(DestroyRef);
 
   visible: boolean = false;
 
@@ -65,7 +68,8 @@ export class Cart implements OnInit {
               return [cartItems];
             })
           );
-        })
+        }),
+        takeUntilDestroyed(this.destroyRef)
       )
       .subscribe((cartItems) => {
         const tempCart = this.cartStateService.cartItems();
@@ -90,7 +94,10 @@ export class Cart implements OnInit {
   }
 
   incrementQuantity(item: ICartItem) {
-    this.cartStateService.incrementQuantity(item.product).subscribe();
+    this.cartStateService
+      .incrementQuantity(item.product)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe();
   }
 
   decrementQuantity(item: ICartItem) {

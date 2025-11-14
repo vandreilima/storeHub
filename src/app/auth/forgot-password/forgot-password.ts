@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +14,7 @@ import { MessageModule } from 'primeng/message';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-forgot-password',
@@ -33,8 +34,8 @@ import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
 export class ForgotPassword {
   private fb = inject(FormBuilder);
   private authService = inject(AuthService);
+  private destroyRef = inject(DestroyRef);
 
-  // Signals para controle de estado
   isEmailSent = signal(false);
   errorMessage = signal('');
   successMessage = signal('');
@@ -59,23 +60,26 @@ export class ForgotPassword {
     };
 
     this.isLoading = true;
-    this.authService.requestPasswordReset(resetData).subscribe({
-      next: (response) => {
-        this.isEmailSent.set(true);
-        this.isLoading = false;
-        this.successMessage.set(
-          response.message || 'E-mail de recuperação enviado com sucesso!'
-        );
-        console.log('E-mail de recuperação enviado');
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.errorMessage.set(
-          error.message || 'Erro ao enviar e-mail de recuperação'
-        );
-        console.error('Erro ao enviar e-mail:', error);
-      },
-    });
+    this.authService
+      .requestPasswordReset(resetData)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (response) => {
+          this.isEmailSent.set(true);
+          this.isLoading = false;
+          this.successMessage.set(
+            response.message || 'E-mail de recuperação enviado com sucesso!'
+          );
+          console.log('E-mail de recuperação enviado');
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage.set(
+            error.message || 'Erro ao enviar e-mail de recuperação'
+          );
+          console.error('Erro ao enviar e-mail:', error);
+        },
+      });
   }
 
   resendEmail() {

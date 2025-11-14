@@ -1,5 +1,5 @@
 import { UserService } from './../../shared/services/user/user.service';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -17,6 +17,7 @@ import { Router, RouterModule } from '@angular/router';
 import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { TranslationService } from '../../shared/translate/translation.service';
 import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sigin-up',
@@ -38,6 +39,7 @@ export class SignUp {
   private userService = inject(UserService);
   private translate = inject(TranslationService);
   private router = inject(Router);
+  private destroyRef = inject(DestroyRef);
 
   errorMessage = signal<string | null>(null);
   successMessage = signal<string | null>(null);
@@ -127,21 +129,24 @@ export class SignUp {
 
     this.isLoading = true;
 
-    this.userService.register(registerData).subscribe({
-      next: () => {
-        this.isLoading = false;
-        this.router.navigate(['/sigin-in']);
-        this.successMessage.set(
-          this.translate.translate('forms.register_success')
-        );
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.errorMessage.set(
-          error.message || this.translate.translate('forms.register_error')
-        );
-        console.error('Erro no cadastro:', error);
-      },
-    });
+    this.userService
+      .register(registerData)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.isLoading = false;
+          this.router.navigate(['/sigin-in']);
+          this.successMessage.set(
+            this.translate.translate('forms.register_success')
+          );
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage.set(
+            error.message || this.translate.translate('forms.register_error')
+          );
+          console.error('Erro no cadastro:', error);
+        },
+      });
   }
 }

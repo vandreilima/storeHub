@@ -30,6 +30,7 @@ export class ProductDetailModal implements OnInit {
   private translatePipe = inject(TranslationService);
   private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
+
   public config = inject(DynamicDialogConfig);
   public ref = inject(DynamicDialogRef);
 

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, inject, signal } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -16,6 +16,7 @@ import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { TranslationService } from '../../shared/translate/translation.service';
 import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sigin-in',
@@ -37,6 +38,7 @@ export class SiginIn {
   private authService = inject(AuthService);
   private router = inject(Router);
   private translate = inject(TranslationService);
+  private destroyRef = inject(DestroyRef);
 
   errorMessage = signal<string | null>(null);
   isLoading = false;
@@ -58,19 +60,21 @@ export class SiginIn {
 
     const credentials: LoginRequest = this.signInForm.getRawValue();
 
-    this.authService.login(credentials).subscribe({
-      next: () => {
-        // Sucesso - o AuthService já faz o redirecionamento
-        this.router.navigate(['/']);
-        this.isLoading = false;
-      },
-      error: (error) => {
-        this.isLoading = false;
-        this.errorMessage.set(
-          error.message || this.translate.translate('forms.login_error')
-        );
-        console.error('Erro no login:', error);
-      },
-    });
+    this.authService
+      .login(credentials)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/']);
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.isLoading = false;
+          this.errorMessage.set(
+            error.message || this.translate.translate('forms.login_error')
+          );
+          console.error('Erro no login:', error);
+        },
+      });
   }
 }

@@ -5,6 +5,9 @@ import {
   inject,
   OnInit,
   signal,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
 } from '@angular/core';
 import { LanguageSelectorComponent } from '../../shared/components/language-selector/language-selector.component';
 import { Filters } from '../../shared/components/products/filters/filters';
@@ -63,7 +66,10 @@ import { FORCE_FORM_FEEDBACK } from '../../shared/utils/form.utils';
   templateUrl: './products.html',
   styleUrl: './products.scss',
 })
-export class Products implements OnInit {
+export class Products implements OnInit, AfterViewInit {
+  @ViewChild('productsContainer', { read: ElementRef })
+  productsContainer!: ElementRef;
+
   private authService = inject(AuthService);
   private userService = inject(UserService);
   private destroyRef = inject(DestroyRef);
@@ -78,6 +84,9 @@ export class Products implements OnInit {
   public displayModal = signal<boolean>(false);
   public isEditMode = signal<boolean>(false);
   public selectedProduct = signal<IProduct | null>(null);
+  public isMobileView = signal<boolean>(false);
+
+  private resizeHandler = () => this.checkViewMode();
 
   public productForm: FormGroup = this.fb.group({
     id: [0],
@@ -117,6 +126,22 @@ export class Products implements OnInit {
 
   ngOnInit(): void {
     this.loadProducts();
+  }
+
+  ngAfterViewInit(): void {
+    this.checkViewMode();
+    window.addEventListener('resize', this.resizeHandler);
+
+    this.destroyRef.onDestroy(() => {
+      window.removeEventListener('resize', this.resizeHandler);
+    });
+  }
+
+  private checkViewMode(): void {
+    if (this.productsContainer) {
+      const containerWidth = this.productsContainer.nativeElement.offsetWidth;
+      this.isMobileView.set(containerWidth < 768);
+    }
   }
 
   private loadProducts(): void {
