@@ -26,7 +26,7 @@
 
     <div class="product-footer">
       <span class="product-price">{{ product.price | currency : "BRL" }}</span>
-      <p-button severity="secondary" size="small">
+      <p-button severity="secondary" size="small" (click)="addItem(product)">
         <i class="pi pi-shopping-cart" pButtonIcon></i>
         <span>{{ "products.add_to_cart" | translate }}</span>
       </p-button>

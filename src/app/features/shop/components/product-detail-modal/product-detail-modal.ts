@@ -7,6 +7,9 @@ import { ProductsService } from '../../../../shared/services/products/products-a
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { TranslatePipe } from '../../../../shared/pipes/translate.pipe';
 import { BadgeModule } from 'primeng/badge';
+import { CartStateService } from '../../../../shared/services/cart/cart-state.service';
+import { TranslationService } from '../../../../shared/translate/translation.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-product-detail-modal',
@@ -23,6 +26,9 @@ import { BadgeModule } from 'primeng/badge';
 })
 export class ProductDetailModal implements OnInit {
   private productsService = inject(ProductsService);
+  private cartStateService = inject(CartStateService);
+  private translatePipe = inject(TranslationService);
+  private messageService = inject(MessageService);
   private destroyRef = inject(DestroyRef);
   public config = inject(DynamicDialogConfig);
   public ref = inject(DynamicDialogRef);
@@ -54,8 +60,26 @@ export class ProductDetailModal implements OnInit {
       });
   }
 
-  addToCart(): void {
-    console.log('Adicionar ao carrinho:', this.product);
-    this.ref.close();
+  addItem(product: IProduct): void {
+    this.cartStateService
+      .addItem(product)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: () => {
+          this.messageService.add({
+            severity: 'success',
+            summary: this.translatePipe.translate(
+              'messages.cart_item_added_title'
+            ),
+            detail: this.translatePipe.translate(
+              'messages.cart_item_added_detail',
+              { productName: product.title }
+            ),
+            life: 3000,
+          });
+
+          this.ref.close();
+        },
+      });
   }
 }
