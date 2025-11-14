@@ -16,7 +16,9 @@
     "error": "Ocorreu um erro. Tente novamente.",
     "confirm_delete": "Tem certeza que deseja excluir este item?",
     "no_data": "Nenhum dado encontrado",
-    "loading_data": "Carregando dados..."
+    "loading_data": "Carregando dados...",
+    "cart_item_added_title": "Produto adicionado!",
+    "cart_item_added_detail": "{{productName}} foi adicionado ao carrinho"
   },
   "auth": {
     "sign_up_title": "Criar Conta",
@@ -94,14 +96,16 @@
     "hero_title": "Bem-vindo ao",
     "hero_title_highlight": "StoreHub",
     "hero_subtitle": "Sua loja de artigos gerais com os melhores produtos e preços. Tudo o que você precisa em um só lugar.",
-    "start_now": "Começar Agora",
+    "start_now": "Acessar",
     "see_demo": "Ver Demonstração"
   },
   "products": {
     "title": "Nossos Produtos",
     "loading": "Carregando produtos...",
     "no_products": "Nenhum produto disponível no momento",
-    "add_to_cart": "Adicionar ao Carrinho"
+    "add_to_cart": "Adicionar ao Carrinho",
+    "reviews": "avaliações",
+    "price": "Preço"
   },
   "shop": {
     "filters": {

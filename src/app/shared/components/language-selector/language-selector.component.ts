@@ -1,8 +1,8 @@
+import { TranslationService } from '../../translate/translation.service';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
-import { TranslationService } from '../../translate/translation.service';
 interface Language {
   label: string;
   value: string;

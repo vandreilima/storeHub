@@ -1,0 +1,70 @@
+<p-overlay-badge [value]="amount()">
+  <p-button severity="secondary" (onClick)="showDrawer()">
+    <i class="pi pi-shopping-cart" pButtonIcon></i>
+    <span>Carrinho</span>
+  </p-button>
+</p-overlay-badge>
+
+<p-drawer [(visible)]="visible" position="right">
+  <ng-template pTemplate="header">
+    <span class="font-semibold text-xl">Carrinho de Compras</span>
+  </ng-template>
+
+  @if (cartItems().length === 0) {
+  <div class="empty-cart">
+    <i class="pi pi-shopping-cart"></i>
+    <p>Seu carrinho está vazio</p>
+  </div>
+  } @else {
+  <div class="cart-items">
+    @for (item of cartItems(); track item.product.id) {
+    <div class="cart-item">
+      <img
+        [src]="item.product.image"
+        [alt]="item.product.title"
+        class="product-image"
+      />
+      <div class="product-info">
+        <h3 class="product-title">{{ item.product.title }}</h3>
+        <p class="product-price">{{ item.product.price | currency : "BRL" }}</p>
+        <div class="quantity-controls">
+          <p-button
+            icon="pi pi-minus"
+            severity="secondary"
+            size="small"
+            [outlined]="true"
+            (onClick)="decrementQuantity(item)"
+            [disabled]="item.quantity <= 1"
+          />
+          <span class="product-quantity">{{ item.quantity }}</span>
+          <p-button
+            icon="pi pi-plus"
+            severity="secondary"
+            size="small"
+            [outlined]="true"
+            (onClick)="incrementQuantity(item)"
+          />
+        </div>
+      </div>
+      <p-button
+        icon="pi pi-trash"
+        severity="danger"
+        size="small"
+        [outlined]="true"
+        [text]="true"
+        (onClick)="removeItem(item)"
+        styleClass="remove-button"
+      />
+    </div>
+    }
+  </div>
+
+  <div class="cart-footer">
+    <div class="total">
+      <span>Total:</span>
+      <span class="total-price">{{ total() | currency : "BRL" }}</span>
+    </div>
+    <p-button label="Finalizar Compra" severity="success" styleClass="w-full" />
+  </div>
+  }
+</p-drawer>

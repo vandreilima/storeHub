@@ -1,9 +1,9 @@
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { Observable, throwError, of } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
+import { Observable, throwError, of } from 'rxjs';
+import { Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 
 @Injectable({

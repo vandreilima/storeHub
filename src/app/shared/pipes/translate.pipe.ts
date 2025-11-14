@@ -30,7 +30,6 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
   ): string {
     if (!key) return '';
 
-    // Verificar se os parâmetros mudaram
     if (
       this.lastKey === key &&
       JSON.stringify(this.lastParams) === JSON.stringify(params) &&
@@ -39,12 +38,10 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
       return this.lastValue;
     }
 
-    // Cancelar subscription anterior se existir
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
 
-    // Subscrever para mudanças de idioma
     this.subscription = this.translationService.currentLang$.subscribe(() => {
       this.lastValue = this.processTranslation(key, params, cssClass);
       this.cdr.markForCheck();
@@ -64,7 +61,6 @@ export class TranslatePipe implements PipeTransform, OnDestroy {
   ): string {
     let translatedText = this.translationService.translate(key, params);
 
-    // Se uma classe CSS foi fornecida, substituir <strong> por <span> com a classe
     if (cssClass) {
       translatedText = translatedText
         .replace(/<span>/g, `<span class="${cssClass}">`)

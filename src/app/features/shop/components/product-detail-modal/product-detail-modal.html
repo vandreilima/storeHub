@@ -1,0 +1,36 @@
+@if(loading) {
+<div class="loading-container">
+  <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
+  <p>{{ "products.loading" | translate }}</p>
+</div>
+} @else if(product) {
+<div class="product-detail">
+  <div class="product-detail-image">
+    <img [ngSrc]="product.image" [alt]="product.title" fill priority />
+  </div>
+
+  <div class="product-detail-content">
+    <h2 class="product-detail-title">{{ product.title }}</h2>
+
+    <div class="product-rating">
+      <p-badge [value]="product.category"></p-badge>
+      <div>
+        <i class="pi pi-star-fill"></i>
+        <span class="ml-1"
+          >{{ product.rating.rate }} ({{ product.rating.count }})</span
+        >
+      </div>
+    </div>
+
+    <p class="product-detail-description">{{ product.description }}</p>
+
+    <div class="product-footer">
+      <span class="product-price">{{ product.price | currency : "BRL" }}</span>
+      <p-button severity="secondary" size="small">
+        <i class="pi pi-shopping-cart" pButtonIcon></i>
+        <span>{{ "products.add_to_cart" | translate }}</span>
+      </p-button>
+    </div>
+  </div>
+</div>
+}

@@ -63,8 +63,12 @@ export class Filters implements OnInit {
     }
   }
 
-  private updateQueryParams(filter: Partial<IProdutcFilter>): void {
-    const queryParams: any = {};
+  private updateQueryParams(filter: Partial<IProductFilter>): void {
+    const queryParams: Partial<{
+      search: string;
+      rating: number;
+      category: string;
+    }> = {};
 
     if (filter.textSearch) queryParams.search = filter.textSearch;
     if (filter.rating) queryParams.rating = filter.rating;
@@ -78,10 +82,6 @@ export class Filters implements OnInit {
   }
 
   clearFilters() {
-    this.form.reset({
-      textSearch: '',
-      rating: '',
-      category: '',
-    });
+    this.form.reset();
   }
 }

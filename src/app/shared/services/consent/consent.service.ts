@@ -22,7 +22,7 @@ export class ConsentService {
     this.loadConsentFromStorage();
   }
 
-  acceptAll(): void {
+  public acceptAll(): void {
     this.consentGivenSignal.set(true);
     this.analyticsConsentSignal.set(true);
     this.showBannerSignal.set(false);
@@ -30,14 +30,14 @@ export class ConsentService {
     this.loadAnalyticsScripts();
   }
 
-  acceptEssentialOnly(): void {
+  public acceptEssentialOnly(): void {
     this.consentGivenSignal.set(true);
     this.analyticsConsentSignal.set(false);
     this.showBannerSignal.set(false);
     this.saveConsent();
   }
 
-  revokeConsent(): void {
+  public revokeConsent(): void {
     this.consentGivenSignal.set(false);
     this.analyticsConsentSignal.set(false);
     this.showBannerSignal.set(true);
@@ -45,7 +45,7 @@ export class ConsentService {
     this.removeAnalyticsScripts();
   }
 
-  checkConsentStatus(): void {
+  public checkConsentStatus(): void {
     const consent = this.getStoredConsent();
 
     if (!consent) {
@@ -66,7 +66,7 @@ export class ConsentService {
   }
 
   private loadClarityScript(): void {
-    const clarityId = 'YOUR_CLARITY_ID'; // TODO não esquecer
+    const clarityId = 'YOUR_CLARITY_ID'; // TODO pensar em uma forma para todos conseguir ver esse teste rodando com o clarity
 
     const script = document.createElement('script');
     script.type = 'text/javascript';

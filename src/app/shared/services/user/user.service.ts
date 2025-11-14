@@ -1,7 +1,7 @@
+import { computed, effect, inject, Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
+import { catchError, Observable, of, tap, throwError } from 'rxjs';
 import { toObservable } from '@angular/core/rxjs-interop';
-import { catchError, map, Observable, of, tap, throwError } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
 @Injectable({
@@ -22,12 +22,23 @@ export class UserService {
     this.userInfoSignal()?.roles.includes('Admin')
   );
 
+  readonly userId = computed(() => this.userInfoSignal()?.id ?? null);
+
   readonly hasAdminOrManagerRole = computed(() => {
     const role = this.userInfoSignal()?.roles;
     return role?.includes('Admin');
   });
 
-  getUserInfo(): Observable<IUser | { error: boolean }> {
+  constructor() {
+    effect(() => {
+      const token = this.authService.token();
+      if (!token) {
+        this.clearUserData();
+      }
+    });
+  }
+
+  public getUserInfo(): Observable<IUser | { error: boolean }> {
     const tokenData = this.authService.getTokenData();
 
     if (!tokenData)
@@ -51,10 +62,15 @@ export class UserService {
     );
   }
 
-  register(data: RegisterRequest): Observable<IUser> {
+  public register(data: RegisterRequest): Observable<IUser> {
     return this.http
       .post<IUser>(`${this.API_URL}`, data)
       .pipe(catchError((error) => this.handleUserError(error)));
+  }
+
+  private clearUserData(): void {
+    this.userInfoSignal.set(null);
+    this.isLoaded = false;
   }
 
   private handleUserError(error: HttpErrorResponse): Observable<never> {

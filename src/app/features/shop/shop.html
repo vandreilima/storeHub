@@ -1,25 +1,40 @@
 <!-- Hero Section -->
-<div class="header">
-  <app-language-selector />
-  @if(authService.isAuthenticated()) {
-  <p-card class="small-card">
-    <div class="user-card-content">
-      <span class="user-name"
-        >{{ user()?.name?.firstname }} {{ user()?.name?.lastname }}</span
-      >
-      <p-button
-        [text]="true"
-        severity="danger"
-        size="small"
-        (onClick)="logout()"
-        [pTooltip]="'Sair'"
-        tooltipPosition="bottom"
-      >
-        <i class="pi pi-sign-out" pButtonIcon></i>
-      </p-button>
-    </div>
-  </p-card>
-  }
+<div class="header-wrapper">
+  <h1 class="text-h1 hero-title m-0">
+    <span class="brand-text">{{
+      "welcome.hero_title_highlight" | translate
+    }}</span>
+  </h1>
+  <div class="header">
+    <app-language-selector />
+    <p-card class="small-card">
+      <div class="user-card-content">
+        @if(authService.isAuthenticated()) {
+        <span class="user-name"
+          >{{ user()?.name?.firstname }} {{ user()?.name?.lastname }}</span
+        >
+        <p-button
+          [text]="true"
+          severity="danger"
+          size="small"
+          (onClick)="logout()"
+          [pTooltip]="'Sair'"
+          tooltipPosition="bottom"
+        >
+          <i class="pi pi-sign-out" pButtonIcon></i>
+        </p-button>
+        } @else {
+        <a routerLink="/sigin-in">
+          <p-button severity="secondary">
+            <i class="pi pi-play" pButtonIcon></i>
+            <span>{{ "welcome.start_now" | translate }}</span>
+          </p-button>
+        </a>
+        }
+        <app-cart></app-cart>
+      </div>
+    </p-card>
+  </div>
 </div>
 <section class="hero-section">
   <div class="container">
@@ -37,7 +52,7 @@
 
       @if(!authService.isAuthenticated()) {
       <div class="hero-actions">
-        <a routerLink="/sigin-up">
+        <a routerLink="/sigin-in">
           <p-button severity="secondary">
             <i class="pi pi-play" pButtonIcon></i>
             <span>{{ "welcome.start_now" | translate }}</span>
@@ -55,27 +70,29 @@
 
     <app-filters (filterChange)="applyFilters($event)"></app-filters>
 
-    @defer (on immediate) { @if(loading) {
+    @defer (on immediate) { @if(loading()) {
     <div class="loading-container">
       <i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
       <p>{{ "products.loading" | translate }}</p>
     </div>
-    } @else if(produtcList.length === 0) {
+    } @else if(produtcList().length === 0) {
     <div class="empty-state">
       <p>{{ "products.no_products" | translate }}</p>
     </div>
     } @else {
     <div class="products-grid">
-      @for(product of produtcList; track product.id) {
-      <p-card class="product-card">
+      @for(product of produtcList(); track product.id) {
+      <p-card class="product-card" (click)="openProductDetail(product.id)">
         <ng-template pTemplate="header">
           <div class="product-image-container">
-            <img [src]="product.image" [alt]="product.title" />
+            <img [ngSrc]="product.image" [alt]="product.title" width="200" height="200" />
           </div>
         </ng-template>
         <div class="product-content">
           <h3 class="product-title">{{ product.title }}</h3>
-          <p class="product-category">{{ product.category }}</p>
+          <p class="product-category">
+            <p-badge [value]="product.category"></p-badge>
+          </p>
           <p class="product-description">{{ product.description }}</p>
           <div class="product-rating">
             <i class="pi pi-star-fill"></i>
@@ -87,7 +104,11 @@
             <span class="product-price">{{
               product.price | currency : "BRL"
             }}</span>
-            <p-button severity="secondary" size="small">
+            <p-button
+              severity="secondary"
+              size="small"
+              (click)="addItem($event, product)"
+            >
               <i class="pi pi-shopping-cart" pButtonIcon></i>
               <span>{{ "products.add_to_cart" | translate }}</span>
             </p-button>
@@ -104,3 +125,4 @@
     }
   </div>
 </section>
+<p-toast></p-toast>

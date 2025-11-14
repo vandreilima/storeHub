@@ -1,6 +1,5 @@
 @use "./styles/primeng-theme.scss";
 
-// Import Google Fonts - Roboto Condensed and Inter
 @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -88,7 +87,6 @@ body {
   color: var(--neutral-600);
 }
 
-// Utility classes for spacing
 .p-1 {
   padding: var(--spacing-1);
 }
@@ -108,9 +106,18 @@ body {
   padding: var(--spacing-8);
 }
 
+.m-0 {
+  margin: 0;
+}
+
 .m-1 {
   margin: var(--spacing-1);
 }
+
+.ml-1 {
+  margin-left: var(--spacing-1);
+}
+
 .m-2 {
   margin: var(--spacing-2);
 }
@@ -154,16 +161,6 @@ body {
   .grid-2 {
     grid-template-columns: 1fr;
   }
-}
-
-// ============================================
-// GLOBAL COMPONENT STYLES
-// ============================================
-
-// Common Page Layouts
-.page-container {
-  padding: var(--spacing-6);
-  background-color: var(--surface-ground);
 }
 
 .page-header {
@@ -541,7 +538,6 @@ body {
   border: 1px solid var(--neutral-200);
 }
 
-// Toast and Confirmation Dialogs
 .p-toast {
   z-index: 9999;
 
@@ -611,10 +607,6 @@ body {
 
 // Responsive utilities
 @media (max-width: 768px) {
-  .page-container {
-    padding: var(--spacing-4);
-  }
-
   .p-datatable {
     .p-datatable-thead > tr > th,
     .p-datatable-tbody > tr > td {

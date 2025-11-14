@@ -16,7 +16,9 @@
     "error": "Ocurri� un error. Int�ntalo de nuevo.",
     "confirm_delete": "�Est�s seguro de que deseas eliminar este elemento?",
     "no_data": "No se encontraron datos",
-    "loading_data": "Cargando datos..."
+    "loading_data": "Cargando datos...",
+    "cart_item_added_title": "¡Producto agregado!",
+    "cart_item_added_detail": "{{productName}} ha sido agregado al carrito"
   },
   "auth": {
     "sign_up_title": "Crear Cuenta",
@@ -107,7 +109,9 @@
     "title": "Nuestros Productos",
     "loading": "Cargando productos...",
     "no_products": "No hay productos disponibles en este momento",
-    "add_to_cart": "Agregar al Carrito"
+    "add_to_cart": "Agregar al Carrito",
+    "reviews": "reseñas",
+    "price": "Precio"
   },
   "shop": {
     "filters": {

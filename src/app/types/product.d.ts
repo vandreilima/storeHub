@@ -1,4 +1,4 @@
-interface IProdutc {
+interface IProduct {
   id: number;
   title: string;
   price: number;
@@ -11,7 +11,7 @@ interface IProdutc {
   };
 }
 
-interface IProdutcFilter {
+interface IProductFilter {
   textSearch: string;
   rating: number;
   category: string;

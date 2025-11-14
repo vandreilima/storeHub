@@ -1,12 +1,11 @@
 export const designTokens = {
-  // Primary Colors (Brand) - sincronizado com primeng-theme.scss
   primary: {
     50: '#fef7f4',
     100: '#fdeee8',
     200: '#fad5c6',
     300: '#f7bca4',
     400: '#f49060',
-    500: '#f26938', // Main brand color
+    500: '#f26938',
     600: '#e55a2c',
     700: '#c44a1f',
     800: '#a33b15',
@@ -14,12 +13,10 @@ export const designTokens = {
     950: '#6b2409',
   },
 
-  // Auxiliary Colors
   auxiliary: {
     base: '#f24141',
   },
 
-  // Semantic Colors
   semantic: {
     success: '#10b981',
     warning: '#f59e0b',
@@ -27,7 +24,6 @@ export const designTokens = {
     info: '#3b82f6',
   },
 
-  // Neutral Colors
   neutral: {
     50: '#fafafa',
     100: '#f5f5f5',
@@ -42,7 +38,6 @@ export const designTokens = {
     950: '#0a0a0a',
   },
 
-  // Background & Surface
   background: {
     default: '#f2f2f2',
   },
@@ -51,7 +46,6 @@ export const designTokens = {
     default: '#ffffff',
   },
 
-  // Spacing (8px system)
   spacing: {
     1: '4px',
     2: '8px',
@@ -64,7 +58,6 @@ export const designTokens = {
     24: '96px',
   },
 
-  // Border Radius
   borderRadius: {
     sm: '2px',
     base: '4px',
@@ -73,7 +66,6 @@ export const designTokens = {
     xl: '12px',
   },
 
-  // Typography
   typography: {
     fontFamily: {
       primary: '"Roboto Condensed", sans-serif',
@@ -92,7 +84,7 @@ export const designTokens = {
   },
 } as const;
 
-// Função helper para acessar tokens de forma type-safe
+// Função helper para acessar tokens de forma type-safe (caso necessario)
 export const getToken = (path: string) => {
   return path.split('.').reduce((obj: any, key) => obj?.[key], designTokens);
 };
