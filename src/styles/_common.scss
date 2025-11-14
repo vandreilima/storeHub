@@ -6,6 +6,8 @@
 
 .text-layout {
   max-width: 470px;
+  width: 100%;
+  padding: var(--spacing-4);
 }
 
 .form-container {
@@ -22,13 +24,16 @@
 .header-wrapper {
   position: fixed;
   display: flex;
-  padding: var(--spacing-4);
+  padding: 0 var(--spacing-4);
   top: 0;
   left: 0;
   right: 0;
   z-index: 10;
   background: var(--background-default);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .header {
