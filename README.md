@@ -142,7 +142,9 @@ O desenvolvimento deste projeto seguiu uma abordagem estruturada em etapas:
 
 2. **Autenticação e Segurança** - Em seguida, foi construído o módulo de autenticação completo com guards de rota, implementando métodos de segurança robustos para gerenciar o estado de autenticação e proteger rotas privadas.
 
-3. **Funcionalidades Principais** - Por fim, foram desenvolvidas as principais telas da aplicação, como a Loja (Shop) e a listagem de Produtos, integrando todos os componentes e serviços criados anteriormente.
+3. **LGPD e Privacidade** - Como esse projeto ter uma melhoria continua da sua interface, integruei tambem o clarity da microsoft para obeter metricar de utilização, porem por se tratar de um teste nao esta utilziando uma chave real, nessa etapa criei tambem a sessao de cookies para guaradar o consentimento do usuario.
+
+4. **Funcionalidades Principais** - Por fim, foram desenvolvidas as principais telas da aplicação, como a Loja (Shop) e a listagem de Produtos, integrando todos os componentes e serviços criados anteriormente.
 
 ---
 
