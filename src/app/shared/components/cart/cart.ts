@@ -1,4 +1,4 @@
-import { ProductsService } from '../../services/products/products.service';
+import { ProductsService } from '../../services/products/products-api.service';
 import { UserService } from './../../services/user/user.service';
 import { CartStateService } from '../../services/cart/cart-state.service';
 import { OverlayBadgeModule } from 'primeng/overlaybadge';
@@ -41,7 +41,7 @@ export class Cart implements OnInit {
   });
 
   ngOnInit(): void {
-    this.userService.userInfoSignal$
+    this.userService.userInfo
       .pipe(
         filter((user) => !!user?.id),
         switchMap((user) => {

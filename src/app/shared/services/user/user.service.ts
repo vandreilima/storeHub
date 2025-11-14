@@ -14,18 +14,16 @@ export class UserService {
 
   isLoaded = false;
 
-  private userInfoSignal = signal<IUser | null>(null);
-  public userInfoSignal$ = toObservable(this.userInfoSignal);
-  readonly userRole = computed(() => this.userInfoSignal()?.roles || null);
+  private _userInfo = signal<IUser | null>(null);
+  public userInfo = toObservable(this._userInfo);
+  readonly userRole = computed(() => this._userInfo()?.roles || null);
 
-  readonly isAdmin = computed(() =>
-    this.userInfoSignal()?.roles.includes('Admin')
-  );
+  readonly isAdmin = computed(() => this._userInfo()?.roles.includes('Admin'));
 
-  readonly userId = computed(() => this.userInfoSignal()?.id ?? null);
+  readonly userId = computed(() => this._userInfo()?.id ?? null);
 
   readonly hasAdminOrManagerRole = computed(() => {
-    const role = this.userInfoSignal()?.roles;
+    const role = this._userInfo()?.roles;
     return role?.includes('Admin');
   });
 
@@ -53,7 +51,7 @@ export class UserService {
           roles: ['Admin'],
         };
 
-        this.userInfoSignal.set(userInfo);
+        this._userInfo.set(userInfo);
         this.isLoaded = true;
       }),
       catchError((error) => {
@@ -69,7 +67,7 @@ export class UserService {
   }
 
   private clearUserData(): void {
-    this.userInfoSignal.set(null);
+    this._userInfo.set(null);
     this.isLoaded = false;
   }
 

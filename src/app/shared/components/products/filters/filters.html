@@ -17,15 +17,12 @@
 
     <div class="form-field">
       <label for="category">{{ "shop.filters.category" | translate }}</label>
-      <p-multiSelect
+
+      <input
+        pInputText
         id="category"
         formControlName="category"
-        [options]="[]"
-        optionLabel="name"
-        optionValue="id"
         [placeholder]="'shop.filters.categoryPlaceholder' | translate"
-        [showClear]="true"
-        display="chip"
       />
     </div>
 

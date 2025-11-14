@@ -6,7 +6,7 @@ import { UserService } from '../services/user/user.service';
 export const configCompleteGuard: CanActivateFn = () => {
   const userService = inject(UserService);
 
-  return userService.userInfoSignal$.pipe(
+  return userService.userInfo.pipe(
     map((user) => {
       // TODO verificar possibilidades de identificar um primeiro login
 

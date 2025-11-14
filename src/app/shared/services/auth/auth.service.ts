@@ -17,13 +17,13 @@ export class AuthService {
 
   private readonly API_URL = 'https://fakestoreapi.com/auth';
 
-  private tokenSignal = signal<string | null>(null);
-  private loadingSignal = signal<boolean>(false);
+  private _token = signal<string | null>(null);
+  private _loading = signal<boolean>(false);
 
-  readonly token = this.tokenSignal.asReadonly();
-  readonly isLoading = this.loadingSignal.asReadonly();
+  readonly token = this._token.asReadonly();
+  readonly isLoading = this._loading.asReadonly();
 
-  readonly isAuthenticated = computed(() => !!this.tokenSignal());
+  readonly isAuthenticated = computed(() => !!this._token());
 
   // Converte o signal isAuthenticated para Observable quando necessário
   readonly isAuthenticated$ = toObservable(this.isAuthenticated);
@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   login(credentials: LoginRequest): Observable<string> {
-    this.loadingSignal.set(true);
+    this._loading.set(true);
 
     return this.http
       .post<ApiSuccessResponse>(`${this.API_URL}/login`, credentials)
@@ -43,25 +43,25 @@ export class AuthService {
           this.handleAuthSuccess(token);
         }),
         catchError((error) => this.handleAuthError(error)),
-        tap(() => this.loadingSignal.set(false))
+        tap(() => this._loading.set(false))
       );
   }
 
   requestPasswordReset(
     data: ResetPasswordRequest
   ): Observable<{ message: string }> {
-    this.loadingSignal.set(true);
+    this._loading.set(true);
 
     return of({
       message: 'Opa, sera enviado um email de recuperação para voce',
     }).pipe(
       catchError((error) => this.handleAuthError(error)),
-      tap(() => this.loadingSignal.set(false))
+      tap(() => this._loading.set(false))
     );
   }
 
   logout(): void {
-    this.tokenSignal.set(null);
+    this._token.set(null);
 
     localStorage.removeItem(this.STORAGE_KEY);
 
@@ -79,7 +79,7 @@ export class AuthService {
   }
 
   private handleAuthSuccess(token: string): void {
-    this.tokenSignal.set(token);
+    this._token.set(token);
 
     const authData: AuthStorageData = {
       token: token,
@@ -108,7 +108,7 @@ export class AuthService {
     const authData = this.getStoredAuthData();
 
     if (authData) {
-      this.tokenSignal.set(authData.token);
+      this._token.set(authData.token);
     }
   }
 

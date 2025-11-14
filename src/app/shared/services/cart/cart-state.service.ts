@@ -10,10 +10,10 @@ export class CartStateService {
   private cartApiService = inject(CartApiService);
   private userService = inject(UserService);
 
-  private _cartItemsSignal = signal<ICartItem[]>([]);
+  private _cartItems = signal<ICartItem[]>([]);
   private _cartSignal = signal<ICart | null>(null);
 
-  readonly cartItems = this._cartItemsSignal.asReadonly();
+  readonly cartItems = this._cartItems.asReadonly();
   readonly cart = this._cartSignal.asReadonly();
 
   public loadCartById(userId: number): Observable<ICart> {
@@ -23,7 +23,7 @@ export class CartStateService {
   }
 
   public setCartItems(items: ICartItem[]): void {
-    this._cartItemsSignal.set(items);
+    this._cartItems.set(items);
   }
 
   public addItem(newItem: IProduct): Observable<ICart> {
@@ -43,7 +43,7 @@ export class CartStateService {
   }
 
   public incrementQuantity(product: IProduct): Observable<ICart> {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
     const existingItemIndex = currentItems.findIndex(
       (item) => item.product.id === product.id
     );
@@ -63,7 +63,7 @@ export class CartStateService {
   }
 
   public decrementQuantity(product: IProduct): Observable<ICart> {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
     const existingItemIndex = currentItems.findIndex(
       (item) => item.product.id === product.id
     );
@@ -89,12 +89,12 @@ export class CartStateService {
   }
 
   public removeItem(productId: number): Observable<ICart> {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
 
     const updatedItems = currentItems.filter(
       (item) => item.product.id !== productId
     );
-    this._cartItemsSignal.set(updatedItems);
+    this._cartItems.set(updatedItems);
 
     const currentCart = this._cartSignal();
     if (!currentCart) {
@@ -112,21 +112,18 @@ export class CartStateService {
   }
 
   public clearCart(): void {
-    this._cartItemsSignal.set([]);
+    this._cartItems.set([]);
     this._cartSignal.set(null);
   }
 
   private _addToTempCart(newItem: IProduct): Observable<ICart> {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
     const existingItemIndex = currentItems.findIndex(
       (item) => item.product.id === newItem.id
     );
 
     if (existingItemIndex === -1) {
-      this._cartItemsSignal.set([
-        ...currentItems,
-        { product: newItem, quantity: 1 },
-      ]);
+      this._cartItems.set([...currentItems, { product: newItem, quantity: 1 }]);
     } else {
       this._updateLocalQuantity(existingItemIndex, 1);
     }
@@ -145,7 +142,7 @@ export class CartStateService {
       .pipe(
         tap((cart) => {
           this._cartSignal.set(cart);
-          this._cartItemsSignal.set([{ product: newItem, quantity: 1 }]);
+          this._cartItems.set([{ product: newItem, quantity: 1 }]);
         })
       );
   }
@@ -154,7 +151,7 @@ export class CartStateService {
     currentCart: ICart,
     newItem: IProduct
   ): Observable<ICart> {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
     const existingItemIndex = currentItems.findIndex(
       (item) => item.product.id === newItem.id
     );
@@ -166,7 +163,7 @@ export class CartStateService {
 
       return this.cartApiService.update(currentCart.id, updatedCart).pipe(
         tap(() => {
-          this._cartItemsSignal.set([
+          this._cartItems.set([
             ...currentItems,
             { product: newItem, quantity: 1 },
           ]);
@@ -192,7 +189,7 @@ export class CartStateService {
   }
 
   private _updateLocalQuantity(itemIndex: number, delta: number): void {
-    const currentItems = this._cartItemsSignal();
+    const currentItems = this._cartItems();
     const updatedItems = [...currentItems];
 
     updatedItems[itemIndex] = {
@@ -200,7 +197,7 @@ export class CartStateService {
       quantity: updatedItems[itemIndex].quantity + delta,
     };
 
-    this._cartItemsSignal.set(updatedItems);
+    this._cartItems.set(updatedItems);
   }
 
   private _updateCartOnServer(

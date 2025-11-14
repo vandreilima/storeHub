@@ -6,16 +6,16 @@ import { Injectable, signal, computed } from '@angular/core';
 export class ConsentService {
   private readonly STORAGE_KEY = 'store_hub_consent';
 
-  private consentGivenSignal = signal<boolean>(false);
-  private analyticsConsentSignal = signal<boolean>(false);
-  private showBannerSignal = signal<boolean>(false);
+  private _consentGiven = signal<boolean>(false);
+  private _analyticsConsent = signal<boolean>(false);
+  private _showBanner = signal<boolean>(false);
 
-  readonly consentGiven = this.consentGivenSignal.asReadonly();
-  readonly analyticsConsent = this.analyticsConsentSignal.asReadonly();
-  readonly showBanner = this.showBannerSignal.asReadonly();
+  readonly consentGiven = this._consentGiven.asReadonly();
+  readonly analyticsConsent = this._analyticsConsent.asReadonly();
+  readonly showBanner = this._showBanner.asReadonly();
 
   readonly canLoadAnalytics = computed(
-    () => this.consentGivenSignal() && this.analyticsConsentSignal()
+    () => this._consentGiven() && this._analyticsConsent()
   );
 
   constructor() {
@@ -23,24 +23,24 @@ export class ConsentService {
   }
 
   public acceptAll(): void {
-    this.consentGivenSignal.set(true);
-    this.analyticsConsentSignal.set(true);
-    this.showBannerSignal.set(false);
+    this._consentGiven.set(true);
+    this._analyticsConsent.set(true);
+    this._showBanner.set(false);
     this.saveConsent();
     this.loadAnalyticsScripts();
   }
 
   public acceptEssentialOnly(): void {
-    this.consentGivenSignal.set(true);
-    this.analyticsConsentSignal.set(false);
-    this.showBannerSignal.set(false);
+    this._consentGiven.set(true);
+    this._analyticsConsent.set(false);
+    this._showBanner.set(false);
     this.saveConsent();
   }
 
   public revokeConsent(): void {
-    this.consentGivenSignal.set(false);
-    this.analyticsConsentSignal.set(false);
-    this.showBannerSignal.set(true);
+    this._consentGiven.set(false);
+    this._analyticsConsent.set(false);
+    this._showBanner.set(true);
     this.clearConsent();
     this.removeAnalyticsScripts();
   }
@@ -49,7 +49,7 @@ export class ConsentService {
     const consent = this.getStoredConsent();
 
     if (!consent) {
-      this.showBannerSignal.set(true);
+      this._showBanner.set(true);
     } else {
       if (this.canLoadAnalytics()) {
         this.loadAnalyticsScripts();
@@ -114,8 +114,8 @@ export class ConsentService {
 
   private saveConsent(): void {
     const consent = {
-      consentGiven: this.consentGivenSignal(),
-      analyticsConsent: this.analyticsConsentSignal(),
+      consentGiven: this._consentGiven(),
+      analyticsConsent: this._analyticsConsent(),
       timestamp: new Date().toISOString(),
     };
 
@@ -126,9 +126,9 @@ export class ConsentService {
     const consent = this.getStoredConsent();
 
     if (consent) {
-      this.consentGivenSignal.set(consent.consentGiven);
-      this.analyticsConsentSignal.set(consent.analyticsConsent);
-      this.showBannerSignal.set(false);
+      this._consentGiven.set(consent.consentGiven);
+      this._analyticsConsent.set(consent.analyticsConsent);
+      this._showBanner.set(false);
     }
   }
 

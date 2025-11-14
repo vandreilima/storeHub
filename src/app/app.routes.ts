@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { authChildGuard, guestGuard } from './shared/guards/auth.guard';
+import { adminGuard, authGuard, guestGuard } from './shared/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -10,6 +10,12 @@ export const routes: Routes = [
   {
     path: 'shop',
     loadComponent: () => import('./features/shop/shop').then((x) => x.Shop),
+  },
+  {
+    path: 'product-managemnt',
+    loadComponent: () =>
+      import('./features/products/products').then((x) => x.Products),
+    canActivate: [authGuard, adminGuard],
   },
   {
     path: 'privacy-policy',

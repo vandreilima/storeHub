@@ -1,1 +1,245 @@
-<p>products works!</p>
+<!-- Hero Section -->
+<div class="header-wrapper">
+  <h1 class="text-h1 hero-title m-0">
+    <span class="brand-text">{{
+      "welcome.hero_title_highlight" | translate
+    }}</span>
+  </h1>
+  <div class="header">
+    <app-language-selector />
+    <p-card class="small-card">
+      <div class="user-card-content">
+        <span class="user-name"
+          >{{ user()?.name?.firstname }} {{ user()?.name?.lastname }}</span
+        >
+        <p-button
+          [text]="true"
+          severity="danger"
+          size="small"
+          (onClick)="logout()"
+          [pTooltip]="'Sair'"
+          tooltipPosition="bottom"
+        >
+          <i class="pi pi-sign-out" pButtonIcon></i>
+        </p-button>
+      </div>
+    </p-card>
+  </div>
+</div>
+
+<section class="hero-section">
+  <div class="container">
+    <p-card>
+      <div class="stat-card">
+        <i class="pi pi-box stat-icon"></i>
+        <div class="stat-content">
+          <span class="stat-label">Total de Produtos</span>
+          <span class="stat-value">{{ totalProducts() }}</span>
+        </div>
+      </div>
+    </p-card>
+    <p-card>
+      <div class="stat-card">
+        <i class="pi pi-star stat-icon"></i>
+        <div class="stat-content">
+          <span class="stat-label">Rating Médio</span>
+          <span class="stat-value">{{ averageRating() }}</span>
+        </div>
+      </div>
+    </p-card>
+    <p-card>
+      <div class="stat-card">
+        <i class="pi pi-shopping-cart stat-icon"></i>
+        <div class="stat-content">
+          <span class="stat-label">Produto Mais Vendido</span>
+          <span class="stat-value">{{ topSellingProduct()?.title || 'N/A' }}</span>
+        </div>
+      </div>
+    </p-card>
+  </div>
+</section>
+
+<section class="products-section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="text-h2 section-title">{{ "products.title" | translate }}</h2>
+      <p-button
+        label="Adicionar Produto"
+        icon="pi pi-plus"
+        (onClick)="openProductModal()"
+        severity="success"
+      >
+      </p-button>
+    </div>
+
+    <app-filters (filterChange)="applyFilters($event)"></app-filters>
+
+    <p-table
+      [value]="produtcList()"
+      [loading]="loading()"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5, 10, 20]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} produtos"
+      class="p-datatable-gridlines mt-8"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 80px">Imagem</th>
+          <th pSortableColumn="title">Título <p-sortIcon field="title" /></th>
+          <th pSortableColumn="category">
+            Categoria <p-sortIcon field="category" />
+          </th>
+          <th pSortableColumn="price" style="width: 120px">
+            Preço <p-sortIcon field="price" />
+          </th>
+          <th style="width: 150px">Avaliação</th>
+          <th style="width: 150px">Ações</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-product>
+        <tr>
+          <td>
+            <img
+              [src]="product.image"
+              [alt]="product.title"
+              style="width: 50px; height: 50px; object-fit: contain"
+            />
+          </td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.category }}</td>
+          <td>{{ product.price | currency : "BRL" }}</td>
+          <td>
+            <div style="display: flex; align-items: center; gap: 8px">
+              <p-rating [(ngModel)]="product.rating.rate" [readonly]="true" />
+              <span>({{ product.rating.count }})</span>
+            </div>
+          </td>
+          <td>
+            <div style="display: flex; gap: 8px">
+              <p-button
+                icon="pi pi-pencil"
+                [rounded]="true"
+                [text]="true"
+                severity="info"
+                (onClick)="openProductModal(product)"
+                pTooltip="Editar"
+                tooltipPosition="top"
+              >
+              </p-button>
+              <p-button
+                icon="pi pi-trash"
+                [rounded]="true"
+                [text]="true"
+                severity="danger"
+                (onClick)="confirmDelete(product)"
+                pTooltip="Excluir"
+                tooltipPosition="top"
+              >
+              </p-button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="6" style="text-align: center; padding: 32px">
+            Nenhum produto encontrado
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</section>
+
+<!-- Modal de Cadastro/Edição -->
+<p-dialog
+  [(visible)]="displayModal"
+  [header]="isEditMode() ? 'Editar Produto' : 'Adicionar Produto'"
+  [modal]="true"
+  [style]="{ width: '600px' }"
+  [closable]="true"
+>
+  <form [formGroup]="productForm" (ngSubmit)="saveProduct()">
+    <div class="form-grid">
+      <div class="form-field">
+        <label for="title">Título *</label>
+        <input
+          pInputText
+          id="title"
+          formControlName="title"
+          placeholder="Digite o título do produto"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="category">Categoria *</label>
+        <input
+          pInputText
+          id="category"
+          formControlName="category"
+          placeholder="Digite a categoria"
+        />
+      </div>
+
+      <div class="form-field">
+        <label for="price">Preço *</label>
+        <p-inputNumber
+          id="price"
+          formControlName="price"
+          mode="currency"
+          currency="BRL"
+          locale="pt-BR"
+          placeholder="0,00"
+        >
+        </p-inputNumber>
+      </div>
+
+      <div class="form-field">
+        <label for="image">URL da Imagem *</label>
+        <input
+          pInputText
+          id="image"
+          formControlName="image"
+          placeholder="https://..."
+        />
+      </div>
+
+      <div class="form-field full-width">
+        <label for="description">Descrição *</label>
+        <textarea
+          pInputTextarea
+          id="description"
+          formControlName="description"
+          rows="4"
+          placeholder="Digite a descrição do produto"
+        >
+        </textarea>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <p-button
+        label="Cancelar"
+        severity="secondary"
+        [text]="true"
+        (onClick)="closeModal()"
+        type="button"
+      >
+      </p-button>
+      <p-button
+        [label]="isEditMode() ? 'Atualizar' : 'Adicionar'"
+        type="submit"
+        [disabled]="productForm.invalid"
+      >
+      </p-button>
+    </div>
+  </form>
+</p-dialog>
+
+<p-confirmDialog></p-confirmDialog>
+
+<p-toast></p-toast>

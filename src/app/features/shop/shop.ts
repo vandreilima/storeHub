@@ -17,16 +17,16 @@ import { UserService } from '../../shared/services/user/user.service';
 import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { filter } from 'rxjs';
 import { TooltipModule } from 'primeng/tooltip';
-import { ProductsService } from '../../shared/services/products/products.service';
+import { ProductsService } from '../../shared/services/products/products-api.service';
 import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { BadgeModule } from 'primeng/badge';
-import { Filters } from './components/filters/filters';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ProductDetailModal } from './components/product-detail-modal/product-detail-modal';
 import { Cart } from '../../shared/components/cart/cart';
 import { CartStateService } from '../../shared/services/cart/cart-state.service';
 import { TranslationService } from '../../shared/translate/translation.service';
 import { ToastModule } from 'primeng/toast';
+import { Filters } from '../../shared/components/products/filters/filters';
 @Component({
   selector: 'app-shop',
   imports: [
@@ -63,7 +63,7 @@ export class Shop implements OnInit {
   public loading = signal<boolean>(false);
 
   public user = toSignal(
-    this.userService.userInfoSignal$.pipe(
+    this.userService.userInfo.pipe(
       filter((result) => !!result?.id),
       takeUntilDestroyed(this.destroyRef)
     )
@@ -100,11 +100,12 @@ export class Shop implements OnInit {
           .toLowerCase()
           .includes(filter.textSearch.toLowerCase());
 
+      const matchesCategory =
+        !filter.category ||
+        product.category.toLowerCase().includes(filter.category.toLowerCase());
+
       const matchesRating =
         !filter.rating || product.rating.rate >= filter.rating;
-
-      const matchesCategory =
-        !filter.category || product.category === filter.category;
 
       return matchesText && matchesRating && matchesCategory;
     });

@@ -13,6 +13,17 @@
         <span class="user-name"
           >{{ user()?.name?.firstname }} {{ user()?.name?.lastname }}</span
         >
+        <a routerLink="/product-managemnt">
+          <p-button
+            [text]="true"
+            severity="danger"
+            size="small"
+            tooltipPosition="bottom"
+          >
+            <i class="pi pi-cog" pButtonIcon></i>
+          </p-button>
+        </a>
+
         <p-button
           [text]="true"
           severity="danger"
@@ -85,7 +96,11 @@
       <p-card class="product-card" (click)="openProductDetail(product.id)">
         <ng-template pTemplate="header">
           <div class="product-image-container">
-            <img [ngSrc]="product.image" [alt]="product.title" width="200" height="200" />
+            <img
+              [ngSrc]="product.image"
+              [alt]="product.title"
+              fill
+            />
           </div>
         </ng-template>
         <div class="product-content">
