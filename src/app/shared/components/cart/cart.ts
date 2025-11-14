@@ -24,10 +24,10 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Cart implements OnInit {
-  private cartStateService = inject(CartStateService);
-  private userService = inject(UserService);
-  private productsService = inject(ProductsService);
-  private destroyRef = inject(DestroyRef);
+  private readonly cartStateService = inject(CartStateService);
+  private readonly userService = inject(UserService);
+  private readonly productsService = inject(ProductsService);
+  private readonly destroyRef = inject(DestroyRef);
 
   visible: boolean = false;
 

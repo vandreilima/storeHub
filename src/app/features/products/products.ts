@@ -70,13 +70,13 @@ export class Products implements OnInit, AfterViewInit {
   @ViewChild('productsContainer', { read: ElementRef })
   productsContainer!: ElementRef;
 
-  private authService = inject(AuthService);
-  private userService = inject(UserService);
-  private destroyRef = inject(DestroyRef);
-  private fb = inject(FormBuilder);
-  private confirmationService = inject(ConfirmationService);
-  private messageService = inject(MessageService);
-  private productsStateService = inject(ProductsStateService);
+  private readonly authService = inject(AuthService);
+  private readonly userService = inject(UserService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
+  private readonly confirmationService = inject(ConfirmationService);
+  private readonly messageService = inject(MessageService);
+  private readonly productsStateService = inject(ProductsStateService);
 
   public allProducts = this.productsStateService.products;
   public produtcList = signal<IProduct[]>([]);

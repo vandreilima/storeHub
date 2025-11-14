@@ -49,15 +49,15 @@ import { Filters } from '../../shared/components/products/filters/filters';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Shop implements OnInit {
-  public authService = inject(AuthService);
-  private userService = inject(UserService);
-  private productsService = inject(ProductsService);
-  private destroyRef = inject(DestroyRef);
-  private dialogService = inject(DialogService);
-  private cartStateService = inject(CartStateService);
-  private messageService = inject(MessageService);
-  private translatePipe = inject(TranslationService);
+  private readonly userService = inject(UserService);
+  private readonly productsService = inject(ProductsService);
+  private readonly destroyRef = inject(DestroyRef);
+  private readonly dialogService = inject(DialogService);
+  private readonly cartStateService = inject(CartStateService);
+  private readonly messageService = inject(MessageService);
+  private readonly translatePipe = inject(TranslationService);
 
+  public authService = inject(AuthService);
   public allProducts = signal<IProduct[]>([]);
   public produtcList = signal<IProduct[]>([]);
   public loading = signal<boolean>(false);

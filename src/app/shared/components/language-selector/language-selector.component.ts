@@ -71,7 +71,9 @@ export class LanguageSelectorComponent {
 
   selectedLanguage: string = this.translationService.getCurrentLanguage();
 
-  onLanguageChange(event: any): void {
-    this.translationService.setLanguage(event.value);
+  onLanguageChange(event: { value: string }): void {
+    if (event?.value) {
+      this.translationService.setLanguage(event.value);
+    }
   }
 }
